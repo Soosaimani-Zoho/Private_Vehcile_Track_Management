@@ -778,7 +778,7 @@ h6 {
   padding-right: 20px;
   padding-bottom: 5px;
   transition: 0.3s;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .dashboard .filter .icon:hover,
@@ -810,7 +810,7 @@ h6 {
 }
 
 .dashboard .info-card h6 {
-  font-size: 28px;
+  font-size: 14px;
   color: #012970;
   font-weight: 700;
   margin: 0;
