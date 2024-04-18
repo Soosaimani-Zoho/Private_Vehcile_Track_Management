@@ -48,15 +48,23 @@
       <!--End Second Row-->
 
       <!--Thired Row-->
-      <div class="row">
-        <div class="col-lg-3">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Vechile List</h5>
-              <p>vechile details</p>
+      
+        <div class="row">
+          
+        {% with vahicle='three' %}
+          
+            <div class="col-lg-3">
+              {% for i in vahicle %}  
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Vehicle List</h5>
+                        <p>Subscription expired since 01/02/2023</p>
+                    </div>
+                </div>{% endfor %}
             </div>
-          </div>
-        </div>
+        
+        {% endwith %}
+      
 
         <div class="col-lg-9">
 
@@ -101,7 +109,7 @@
     // Set the map's view to focus on the marker's position --> optional
     // map.setView([11.1271, 78.6569], 8); // Set the new center and zoom level
 
-    
+
   </script>
   {% endblock %}
  
