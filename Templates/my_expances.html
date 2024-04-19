@@ -3,28 +3,54 @@
 {% block content %}
 
 
+
+
     <section class="section">
       
       <div class="container">
         <div class="row justify-content-end">
-          
-          <div class="col-auto" style="padding-bottom: 20px;">
-            
-              <button class="btn btn-outline-success dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                Update
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li><button class="dropdown-item" type="button">Bulk Update Driver Assignment</button></li>
-                <li><button class="dropdown-item" type="button">Add Vehicles in Bulk</button></li>
-                <li><button class="dropdown-item" type="button">Update Vehicle Details in Bulk</button></li>
-              </ul>
-           
-            <button type="button" class="btn btn-outline-success rounded-pill"> + Add Vehicle</button>
-            <button type="button" class="btn btn-outline-success rounded-pill"><i class="bx bxs-download"></i></button>
-          </div>
-          
+            <div class="col-auto" style="padding-bottom: 20px;">
+                <div class="d-flex align-items-center">
+                    <select class="form-select me-3" aria-label="Default select example">
+                        <option selected>Select User</option>
+                        <option value="1">User 1</option>
+                        <option value="2">User 2</option>
+                        <option value="3">user 3</option>
+                    </select>
+    
+                    <select class="form-select me-3" aria-label="Default select example">
+                        <option selected>Vehicle Group</option>
+                        <option value="1">Group 1</option>
+                        <option value="2">Group 2</option>
+                        <option value="3">Group 3</option>
+                    </select>
+    
+                    <select class="form-select me-3" aria-label="Default select example">
+                        <option selected>Vehicles</option>
+                        <option value="1">Vehicles 1</option>
+                        <option value="2">Vehicles 2</option>
+                        <option value="3">Vehicles 3</option>
+                    </select>
+                    
+                    <div class="input-group me-3">
+                      <span class="input-group-text">Start and End Date</span>
+                      <input type="date" aria-label="Start Date" class="form-control" style="width: 150px;">
+                      <input type="date" aria-label="End Date" class="form-control" style="width: 150px;">
+                    </div>
+                  
+    
+                    <button type="button" class="btn btn-primary me-3">Apply</button>
+                    
+                    <button type="button" class="btn btn-outline-success me-3">Reset</button>
+
+                    <button type="button" class="btn btn-primary me-3"> + New Expances</button>
+                    
+                    <button type="button" class="btn btn-outline-success">Bulk <i class="ri-upload-2-fill"></i></button>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
+    
 
 
 

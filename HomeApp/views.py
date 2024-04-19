@@ -1,6 +1,11 @@
 from django.shortcuts import render  #, HttpResponse
 from django.views import View
 
+class Login(View):
+    def get(self, request):
+        #return HttpResponse("welcome")
+        return render(request, 'login.html')
+
 
 class HomeApp(View):
     def get(self, request):
@@ -15,3 +20,11 @@ class all_vehicle(View):
 class vehicle_directory(View):
     def get(self, request):
         return render(request,'vehicle_directory.html')
+
+class vehicle_group(View):
+    def get(self, request):
+        return render(request,'vehicle_group.html')
+
+class my_expances(View):
+    def get(self, request):
+        return render(request,'my_expances.html')
