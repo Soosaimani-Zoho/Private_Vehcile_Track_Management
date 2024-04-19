@@ -4,7 +4,7 @@
   <style>
     .bgcolorcustom {
       background-color: #eff2f6;
-      padding: 15px;
+      padding: 10px;
       text-align: center;
     
     }
@@ -15,6 +15,7 @@
     }
 
 
+    
   </style>
   
   
@@ -49,41 +50,51 @@
 
       <!--Thired Row-->
       
-        <div class="row">
-          
-        {% with vahicle='three' %}
-          
-            <div class="col-lg-3">
-              {% for i in vahicle %}  
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Vehicle List</h5>
-                        <p>Subscription expired since 01/02/2023</p>
+      <div class="row">
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header" id="vehicleCardHeader">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" type="button" data-bs-toggle="collapse" data-bs-target="#vehicleCardBody" aria-expanded="true" aria-controls="vehicleCardBody">
+                            Vehicle Details
+                        </button>
+                    </h5>
+                </div>
+                <div id="vehicleCardBody" class="collapse show" aria-labelledby="vehicleCardHeader">
+                    <div class="card-body" style="height: 600px; overflow-y: auto;">
+                        {% with vehicle='three' %}
+                        {% for i in vehicle %}
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Vehicle No. : TN 33 Gotoz 0000</h5>
+                                <div style="font-size: small;">Device Status : ONLINE | Today : 0 Km</div>
+                                <div style="font-size: small;">Last data received 4 min ago</div>
+                                <div style="font-size: 11px;">Subscription expired since 01/02/2023</div>
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-share me-3 custom-icon"></i>
+                                    <i class="bi bi-eye me-3 custom-icon"></i>
+                                    <i class="bi bi-person me-3 custom-icon"></i>
+                                    <i class="bi bi-speedometer2 custom-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% endwith %}
                     </div>
-                </div>{% endfor %}
+                </div>
             </div>
-        
-        {% endwith %}
-      
-
-        <div class="col-lg-9">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Track All Vehicle Details</h5>
-
-              
-              <div id="map" style="height: 600px;"></div>
- 
-              <!-- End Table with stripped rows -->
-
-            </div>
-          </div>
-
-          
-
         </div>
-      </div>
+    
+        <div class="col-lg-9">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Track All Vehicle Details</h5>
+                    <div id="map" style="height: 600px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
       <!--End Third Row-->
     </section>
     
@@ -94,7 +105,7 @@
   
       // Add the OpenStreetMap base layer to the map
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution: '&copy; <a href="#">Gotoz Map</a> KSM'
       }).addTo(map);
 
       var customIcon = L.icon({
@@ -108,6 +119,20 @@
 
     // Set the map's view to focus on the marker's position --> optional
     // map.setView([11.1271, 78.6569], 8); // Set the new center and zoom level
+
+
+
+
+    // Create a Bootstrap popup content
+    var popupContent = '<div class="popup"><h3>Marker Popup</h3><p>This is a Bootstrap popup.</p></div>';
+
+    // Bind popup to marker
+    marker.bindPopup(popupContent);
+
+    // Open popup on marker click
+    marker.on('click', function (e) {
+      this.openPopup();
+    });
 
 
   </script>
