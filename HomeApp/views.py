@@ -10,4 +10,8 @@ class HomeApp(View):
 class all_vehicle(View):
     def get(self, request):
         return render(request,'all_vehicle.html')
-# Create your views here.
+    
+    
+class vehicle_directory(View):
+    def get(self, request):
+        return render(request,'vehicle_directory.html')
