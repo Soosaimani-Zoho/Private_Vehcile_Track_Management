@@ -32,3 +32,7 @@ class my_expances(View):
 class service_history(View):
     def get(self,request):
         return render(request, 'service_history.html')
+    
+class service_schedules(View):
+    def get(self,request):
+        return render(request,'service_schedules.html')

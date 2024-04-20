@@ -695,7 +695,7 @@ h6 {
 
 
 .sidebar-nav .nav-link i {
-  font-size: 12px;
+  font-size: 14px; /* sidebar images*/
   margin-right: 10px;
   color: #4154f1;
 }
