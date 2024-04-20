@@ -28,3 +28,7 @@ class vehicle_group(View):
 class my_expances(View):
     def get(self, request):
         return render(request,'my_expances.html')
+
+class service_history(View):
+    def get(self,request):
+        return render(request, 'service_history.html')

@@ -9,6 +9,7 @@ urlpatterns = [
     path('all_vehicle',all_vehicle.as_view(),name="all_vehicle"),
     path('vehicle_directory', vehicle_directory.as_view(), name = 'vehicle_directory'),
     path('vehicle_group',vehicle_group.as_view(), name='vehicle_group'),
-    path('my_expances',my_expances.as_view(),name='my_expances')
+    path('my_expances',my_expances.as_view(),name='my_expances'),
+    path('service_history',service_history.as_view(), name = 'service_history'),
 ]
 

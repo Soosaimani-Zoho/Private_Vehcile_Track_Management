@@ -674,7 +674,7 @@ h6 {
 }
 
 .sidebar-nav .nav-heading {
-  font-size: 12px;
+  font-size: 14px; /* like Main, Driver*/
   text-transform: uppercase;
   color: #7a0230;
   font-weight: 800;
@@ -684,7 +684,7 @@ h6 {
 .sidebar-nav .nav-link {
   display: flex;
   align-items: center;
-  font-size: 12px;
+  font-size: 14px; /* Each Menu heading*/
   font-weight: 800;
   color: #4154f1;
   transition: 0.3;
@@ -695,7 +695,7 @@ h6 {
 
 
 .sidebar-nav .nav-link i {
-  font-size: 10px;
+  font-size: 12px;
   margin-right: 10px;
   color: #4154f1;
 }
@@ -736,7 +736,7 @@ h6 {
 .sidebar-nav .nav-content a {
   display: flex;
   align-items: center;
-  font-size: 10px;
+  font-size: 12px; /* Menu - Dropdown*/
   font-weight: 600;
   color: #012970;
   transition: 0.3;

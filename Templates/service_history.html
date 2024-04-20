@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .buttonstyle{
+    display: flex;
+    padding: 10px;
+  }
+
+  .search-bar {
+    min-width: 360px;
+    padding: 0 20px;
+  }
+
+  .search-form .searchbtn-cus-pos {
+    border: 0;
+    padding: 0;
+    margin-left: -30px;
+    background: none;
+  }
+</style>
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="buttonstyle">
+              <button type="button" class="btn btn-danger rounded-pill btn-sm me-2">All</button>
+              <button type="button" class="btn btn-secondary rounded-pill btn-sm me-2">Upcoming</button>
+              <button type="button" class="btn btn-warning rounded-pill btn-sm me-2">Overdue</button>
+              <button type="button" class="btn btn-info rounded-pill btn-sm me-2">Completed</button>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="search-bar d-flex align-items-center justify-content-between">
+              <form class="search-form align-items-end" method="POST" action="#">
+                <input type="text" name="query" placeholder="Search by Vehicle No" title="Enter search keyword">
+                <button class="searchbtn-cus-pos" type="submit" title="Search"><i class="bi bi-search"></i></button>   
+                             
+              
+                <button class="btn btn-warning ms-3">Filter</button>
+                <button class="btn btn-info ms-auto">Add Service</button>
+                <button class="btn btn-danger ms-auto">Schedules</button>
+              </form>
+            
+            </div>
+           
+          </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 py-2 px-2">
+            Your GPS Device Subscription on 1 device has <b style="color: red;">expired</b>. This interface with the functionality of the Schedules. <a href="#"><b>View Schedules</b></a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Example Card</h5>
+              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Example Card</h5>
+              <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  {% endblock %}
