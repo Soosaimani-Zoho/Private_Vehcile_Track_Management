@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static%}
+{% block content %}
+
+
+    <section class="section">
+      
+      <div class="container">
+        <div class="row justify-content-end">
+          
+          <div class="col-auto" style="padding-bottom: 20px;">
+            
+              
+           
+            <button type="button" class="btn btn-outline-success rounded-pill">Bulk Upload</button>
+            <button type="button" class="btn btn-outline-success rounded-pill"> + Add Vehicle State</button>
+          </div>
+          
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Datatables</h5>
+              <!--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>-->
+
+              <!-- Table with stripped rows -->
+              <table class="table datatable table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Actions</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tamilnadu</td>
+                    <td><input type="color" class="form-control form-control-color" id="exampleColorInput" value="#4154f1" title="Choose your color"></td>
+                    <td>21/4/2024 12:15 AM</td>
+                    <td>21/4/2024 12:15 AM</td>
+                    <td><a href="#">Edit </a> / <a href="#"> Delete</a></td>
+
+                    
+                  </tr>
+                  <tr>
+                    <td>Kerala</td>
+                    <td><input type="color" class="form-control form-control-color" id="exampleColorInput" value="#4154f1" title="Choose your color"></td>
+                    <td>21/4/2024 12:15 AM</td>
+                    <td>21/4/2024 12:15 AM</td>
+                    <td><a href="#">Edit </a> / <a href="#"> Delete</a></td>
+
+                    
+                  </tr>
+
+                  <tr>
+                    <td>Mumbai</td>
+                    <td><input type="color" class="form-control form-control-color" id="exampleColorInput" value="#4154f1" title="Choose your color"></td>
+                    <td>21/4/2024 12:15 AM</td>
+                    <td>21/4/2024 12:15 AM</td>
+                    <td><a href="#">Edit </a> / <a href="#"> Delete</a></td>
+
+                    
+                  </tr>
+                  
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+{% endblock %}
+ 

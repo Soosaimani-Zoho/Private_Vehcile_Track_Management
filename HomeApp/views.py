@@ -24,6 +24,10 @@ class vehicle_directory(View):
 class vehicle_group(View):
     def get(self, request):
         return render(request,'vehicle_group.html')
+    
+class vehicle_states(View):
+    def get(self, request):
+        return render(request,'vehicle_states.html')
 
 class my_expances(View):
     def get(self, request):
