@@ -36,10 +36,20 @@ class all_trips(View):
 class trip_schedules(View):
     def get(self, request):
         return render(request, 'trip_schedules.html')
-
+class routes(View):
+    def get(self,request):
+        return render(request,'routes.html')
+    
+class consigners(View):
+    def get(self, request):
+        return render(request,'consigners.html')
+    
 class my_expances(View):
     def get(self, request):
         return render(request,'my_expances.html')
+    
+
+
 
 class service_history(View):
     def get(self,request):

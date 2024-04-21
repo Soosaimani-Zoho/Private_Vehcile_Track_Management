@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 pb-3 pt-3">
+          </div>
+          <div class="col-lg-5 pb-3 pt-3 text-end">
+            
+            <button class="btn btn-warning rounded-pill btn-sm">+ Add Consigners</button>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <table class="table datatable table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact Number</th>
+                    <th>Address</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Erode to CBE</td>
+                    <td>test@test.test</td>
+                    <td>+91 1919191919</td>
+                    <td>Test Address, Test Dist, Test State</td>
+                    <td><a href="#">Edit </a>/ <a href="#"> Delete</a></td>
+                  </tr>
+                </tbody>
+
+                </div>
+              </table>
+              </div>
+            </div>
+          
+
+        </div>       
+      </div>
+    </section>
+
+  {% endblock %}
