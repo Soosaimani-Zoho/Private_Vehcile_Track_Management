@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 pb-3 pt-3">
+            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">New <span class="badge bg-white text-primary">1</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Ongoing <span class="badge bg-white text-primary">2</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Delayed <span class="badge bg-white text-primary">3</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Completed <span class="badge bg-white text-primary">4</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Unsuccessful <span class="badge bg-white text-primary">5</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Cancelled <span class="badge bg-white text-primary">6</span></button>
+          </div>
+          <div class="col-lg-5 pb-3 pt-3 text-end">
+            <button class="btn btn-warning rounded-pill btn-sm">Bulk Upload</button>
+            <button class="btn btn-warning rounded-pill btn-sm">Download Trip Data</button>
+            <button class="btn btn-warning rounded-pill btn-sm">Create Trip</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <table class="table datatable table-hover">
+                <thead>
+                  <tr>
+                    <th>Trip Details</th>
+                    <th>Vehicle Details</th>
+                    <th>Vehicle Location</th>
+                    <th>Source</th>
+                    <th>Trip Start Time</th>
+                    <th>Destination</th>
+                    <th>Trip End Time</th>
+                    <th>Trip State</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Erode to CBE</td>
+                    <td>TN00G0000</td>
+                    <td>ERD</td>
+                    <td>Cash</td>
+                    <td>12.00 PM</td>
+                    <td>CBE</td>
+                    <td>2.00 PM</td>
+                    <td>Completed</td>
+                    <td><a href="#">Edit </a>/ <a href="#"> Delete</a></td>
+                  </tr>
+                </tbody>
+
+                </div>
+              </table>
+              </div>
+            </div>
+          
+
+        </div>       
+      </div>
+    </section>
+
+  {% endblock %}

@@ -28,6 +28,14 @@ class vehicle_group(View):
 class vehicle_states(View):
     def get(self, request):
         return render(request,'vehicle_states.html')
+    
+class all_trips(View):
+    def get(self, request):
+        return render(request,'all_trips.html')
+    
+class trip_schedules(View):
+    def get(self, request):
+        return render(request, 'trip_schedules.html')
 
 class my_expances(View):
     def get(self, request):
