@@ -19,7 +19,7 @@ class classvehicledetails(admin.ModelAdmin):
 admin.site.register(VehicleDetails, classvehicledetails)
 
 class classgsdevicedetails(admin.ModelAdmin):
-    list_display = ['veciclename','deviceserialno','installedat','expiredat']
+    list_display = ['vehiclename','deviceserialno','installedat','expiredat']
 admin.site.register(GPSDeviceDetails,classgsdevicedetails)
 
 
@@ -29,5 +29,5 @@ admin.site.register(CountryCodeDetails, classcountrycodedetails)
 
 class classvendorprofile(admin.ModelAdmin):
     list_display = ['vendorname','vendoraddress','vendorcountry','vendormob1','vendordistrict']
-admin.site.register()
+admin.site.register(VendorProfile,classvendorprofile)
 # Register your models here.
