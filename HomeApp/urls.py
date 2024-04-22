@@ -1,10 +1,26 @@
 #from django.contrib import admin
 from django.urls import path
 
-from .views import *
+from .views import (
+    HomeApp,
+    Login,
+    all_trips,
+    all_vehicle,
+    consigners,
+    logout_view,
+    my_expances,
+    routes,
+    service_history,
+    service_schedules,
+    trip_schedules,
+    vehicle_directory,
+    vehicle_group,
+    vehicle_states,
+)
 
 urlpatterns = [
     path('',Login.as_view(),name="Login" ),
+    path('logout',logout_view,name='logout'),
     path('dashboard',HomeApp.as_view(),name="dashboard"),
     path('all_vehicle',all_vehicle.as_view(),name="all_vehicle"),
     path('vehicle_directory', vehicle_directory.as_view(), name = 'vehicle_directory'),
