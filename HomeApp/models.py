@@ -10,7 +10,7 @@ class UserProfile(models.Model):
     bio = models.TextField(blank=True)
     
     def __str__(self):
-        return self.user
+        return str(self.user)
 
 class CountryCodeDetails(models.Model):
     countryname = models.CharField(_("Vendor Country Name"), max_length=25)
@@ -21,6 +21,7 @@ class CountryCodeDetails(models.Model):
     
     
 class VendorProfile(models.Model):
+    user = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
     vendorname = models.CharField(_("Vendor name"),max_length=50)
     vendorid = models.CharField(_("Vendor ID"), max_length=50, primary_key=True)
     vendoraddress = models.TextField(_("Vendor Address"))

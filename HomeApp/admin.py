@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import (
     CountryCodeDetails,
     GPSDeviceDetails,
+    GPSDeviceStatus,
     UserProfile,
     VehicleDetails,
     VendorProfile,
@@ -31,3 +32,7 @@ class classvendorprofile(admin.ModelAdmin):
     list_display = ['vendorname','vendoraddress','vendorcountry','vendormob1','vendordistrict']
 admin.site.register(VendorProfile,classvendorprofile)
 # Register your models here.
+
+class classgpsdevicestatus(admin.ModelAdmin):
+    list_display = [field.name for field in GPSDeviceStatus._meta.fields]
+admin.site.register(GPSDeviceStatus, classgpsdevicestatus)
