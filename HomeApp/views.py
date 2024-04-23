@@ -1,6 +1,15 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.shortcuts import redirect, render  #, HttpResponse
 from django.views import View
+
+from .models import (
+    GPSDeviceDetails,
+    GPSDeviceStatus,
+    UserProfile,
+    VehicleDetails,
+    VendorProfile,
+)
 
 
 class Login(View):
@@ -31,8 +40,44 @@ class HomeApp(View):
         return render(request, 'index.html')
     
 class all_vehicle(View):
+    
     def get(self, request):
-        return render(request,'all_vehicle.html')
+        user = request.user.username
+        loginuser = User.objects.get(username=user)
+        userid = int(loginuser.id) + 1
+        #print(userid)
+        #userid=2
+        loginvendor = VendorProfile.objects.get(user=userid)
+        #print(loginvendor.vendorid)
+        
+        vehicletotalregnolist = []
+        vehiclelistquery = VehicleDetails.objects.filter(vendorid=loginvendor.vendorid)
+        print(vehiclelistquery)
+        for vehiclelist in vehiclelistquery:
+            vehicletotalregnolist.append(vehiclelist.vehicleregno)
+        print("total registration no :",vehicletotalregnolist)
+            
+        
+        vehicletotalcount = len(vehiclelistquery)
+        print(vehicletotalcount)
+        
+        gpsdevicelist = []
+        for vehiclename in vehiclelistquery:
+            query = GPSDeviceDetails.objects.filter(vehiclename = vehiclename)
+            for gps_device in query:
+                gpsdevicelist.append(gps_device.deviceserialno)
+        
+        print("GPS Device Found : " ,gpsdevicelist)
+        totalgpsdeviceserialno = len(gpsdevicelist)
+        
+        
+        
+        #gpsdevicedetailsquery = GPSDeviceDetails.object.filter()
+        context = {
+            'user': user, 'totalvehicle':vehicletotalcount, 'vehicletotalregnolist':vehicletotalregnolist, 
+            'totalgpsdevice':totalgpsdeviceserialno, 'gpsdevicelist':gpsdevicelist,
+        }
+        return render(request,'all_vehicle.html', context)
     
     
 class vehicle_directory(View):
