@@ -62,16 +62,27 @@ class all_vehicle(View):
         print(vehicletotalcount)
         
         gpsdevicelist = []
+        gpsdeviceidlist = []
         for vehiclename in vehiclelistquery:
             query = GPSDeviceDetails.objects.filter(vehiclename = vehiclename)
             for gps_device in query:
+                #print(gps_device.id)
                 gpsdevicelist.append(gps_device.deviceserialno)
+                gpsdeviceidlist.append(gps_device.id)
         
         print("GPS Device Found : " ,gpsdevicelist)
+        print("ID is :", gpsdeviceidlist)
         totalgpsdeviceserialno = len(gpsdevicelist)
         
         
         
+        gpsdevicestatuslist ={}
+        for gpsdevice in gpsdeviceidlist:
+            query = GPSDeviceStatus.objects.filter(deviceserialno=gpsdevice)
+            print('query',query)
+            #for gpsstatus in query:
+                #gpsdevicestatuslist.append(gpsstatus)
+        #print(query)
         #gpsdevicedetailsquery = GPSDeviceDetails.object.filter()
         context = {
             'user': user, 'totalvehicle':vehicletotalcount, 'vehicletotalregnolist':vehicletotalregnolist, 

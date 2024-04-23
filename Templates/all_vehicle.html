@@ -63,10 +63,10 @@
                 <div id="vehicleCardBody" class="collapse show" aria-labelledby="vehicleCardHeader">
                     <div class="card-body" style="height: 600px; overflow-y: auto;">
                         {% with vehicle='three' %}
-                        {% for i in vehicle %}
+                        {% for regno in vehicletotalregnolist %}
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Vehicle No. : TN 33 Gotoz 0000</h5>
+                                <h5 class="card-title">Vehicle No. : {{regno}}</h5>
                                 <div style="font-size: small;">Device Status : ONLINE | Today : 0 Km</div>
                                 <div style="font-size: small;">Last data received 4 min ago</div>
                                 <div style="font-size: 11px;">Subscription expired since 01/02/2023</div>
