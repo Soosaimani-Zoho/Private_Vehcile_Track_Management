@@ -6,7 +6,7 @@ from django.views import View
 from .models import (
     GPSDeviceDetails,
     GPSDeviceStatus,
-    UserProfile,
+    #UserProfile,
     VehicleDetails,
     VendorProfile,
 )
@@ -76,17 +76,57 @@ class all_vehicle(View):
         
         
         
-        gpsdevicestatuslist ={}
+        #gpsdevicestatuslist =[]
+        gps_data = {}
+
         for gpsdevice in gpsdeviceidlist:
             query = GPSDeviceStatus.objects.filter(deviceserialno=gpsdevice)
-            print('query',query)
-            #for gpsstatus in query:
-                #gpsdevicestatuslist.append(gpsstatus)
+            gps_data[gpsdevice] = {
+                'moving': [],
+                'stopped': [],
+                'idlling': [],
+                'offline': [],
+                'subsexpired': [],
+                'ignition': [],
+                'gpssignal': [],
+                'speed': [],
+                'orientationvalue': [],
+                'deviceexternalpower': [],
+                'location': [],
+                'temperature': [],
+                'internalbatterypower': [],
+                'movmentvalue': [],
+                'gsmstrength': [],
+                'lat': [],
+                'long': [],
+            }
+            
+            for gpsstatus in query:
+                gps_data[gpsdevice]['moving'].append(gpsstatus.moving)
+                gps_data[gpsdevice]['stopped'].append(gpsstatus.stopped)
+                gps_data[gpsdevice]['idlling'].append(gpsstatus.idlling)
+                gps_data[gpsdevice]['offline'].append(gpsstatus.offline)
+                gps_data[gpsdevice]['subsexpired'].append(gpsstatus.subsexpired)
+                gps_data[gpsdevice]['ignition'].append(gpsstatus.ignition)
+                gps_data[gpsdevice]['gpssignal'].append(gpsstatus.gpssignal)
+                gps_data[gpsdevice]['speed'].append(gpsstatus.speed)
+                gps_data[gpsdevice]['orientationvalue'].append(gpsstatus.orientationvalue)
+                gps_data[gpsdevice]['deviceexternalpower'].append(gpsstatus.deviceexternalpower)
+                gps_data[gpsdevice]['location'].append(gpsstatus.location)
+                gps_data[gpsdevice]['temperature'].append(gpsstatus.temperature)
+                gps_data[gpsdevice]['internalbatterypower'].append(gpsstatus.internalbatterypower)
+                gps_data[gpsdevice]['movmentvalue'].append(gpsstatus.movmentvalue)
+                gps_data[gpsdevice]['gsmstrength'].append(gpsstatus.gsmstrength)
+                gps_data[gpsdevice]['lat'].append(gpsstatus.lat)
+                gps_data[gpsdevice]['long'].append(gpsstatus.long)
+
+        print(gps_data)      
+        #print(gpsdevicestatuslist)
         #print(query)
         #gpsdevicedetailsquery = GPSDeviceDetails.object.filter()
         context = {
             'user': user, 'totalvehicle':vehicletotalcount, 'vehicletotalregnolist':vehicletotalregnolist, 
-            'totalgpsdevice':totalgpsdeviceserialno, 'gpsdevicelist':gpsdevicelist,
+            'totalgpsdevice':totalgpsdeviceserialno, 'gpsdevicelist':gpsdevicelist,'gpsdata': gps_data
         }
         return render(request,'all_vehicle.html', context)
     
