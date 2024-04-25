@@ -15,6 +15,8 @@ from .models import (
     VendorProfile,
 )
 
+vehicle_reg_numbers = VehicleDetails.get_vehicleregno_list()  # to get vechile regno list from db
+
 
 class Login(View):
     def get(self, request):

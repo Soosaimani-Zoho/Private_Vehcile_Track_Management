@@ -2,6 +2,10 @@ from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import json
+from django.core.exceptions import ValidationError
+
+ 
 
 
 class UserProfile(models.Model):
@@ -31,6 +35,24 @@ class vehiclefueltype(models.Model):
     def __str__(self):
         return self.fueltype
     
+class vehiclegroup(models.Model):
+    groupname = models.CharField(_("Vehicle Group Name"), max_length=50)
+    vehicleregnolist = models.TextField(_("Vehicle Reg No list as json"))
+
+    def setlist(self, name, regnolist):
+        self.groupname = name
+        try:
+            self.vehicleregnolist = json.dumps(regnolist)
+        except json.JSONEncodeError as e:
+            raise ValidationError(f"Error encoding JSON: {e}")
+
+    def getlist(self):
+        try:
+            return json.loads(self.vehicleregnolist)
+        except json.JSONDecodeError as e:
+            raise ValidationError(f"Error decoding JSON: {e}")
+    
+    
     
 class VendorProfile(models.Model):
     user = models.OneToOneField(UserProfile, on_delete=models.CASCADE)
@@ -52,16 +74,25 @@ class VehicleDetails(models.Model):
     vehiclename = models.CharField(_("Vehicle Name"), max_length=50)
     vehicleregno = models.CharField(_("Vehicle Reg No"), max_length=50, unique=True)
     vehicletype = models.CharField(_("Vehicle Type"), max_length=50)
-    vehicleimage = models.ImageField(_("Vehicle Image"), upload_to=None, height_field=None, width_field=None, max_length=None)
+    vehicleimage = models.ImageField(_("Vehicle Image"), upload_to=None, null= True, blank= True, height_field=None, width_field=None, max_length=None)
     odometerreading = models.IntegerField(_("Vehicle Odometer Reading"))
     vehiclemake = models.OneToOneField(vehiclemake, on_delete=models.CASCADE)
     modelyear = models.IntegerField(_("Vehicle Model Year"))
     chessisno = models.CharField(_("Vehicle Chassis No"), max_length=50)
-    expectmileage = models.IntegerField(_("Expected Mileage")) 
+    expectmileage = models.IntegerField(_("Expected Mileage"))
+    isdelete = models.BooleanField(_(" Delete or Not"))
+    createdat = models.DateTimeField(_("Created At"),auto_now_add=True)
+    updatedat = models.DateTimeField(_("Updated At"), auto_now=True)
+    
     
     
     def __str__(self):
         return self.vehiclename
+    
+    @classmethod
+    def get_vehicleregno_list(cls):
+        return cls.objects.values_list('vehicleregno', flat=True)
+    
     
 class GPSDeviceDetails(models.Model):
     vehiclename = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
