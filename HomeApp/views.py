@@ -10,12 +10,41 @@ import json
 from .models import (
     GPSDeviceDetails,
     GPSDeviceStatus,
-    #UserProfile,
+    UserProfile,
     VehicleDetails,
     VendorProfile,
 )
 
 vehicle_reg_numbers = VehicleDetails.get_vehicleregno_list()  # to get vechile regno list from db
+#loingid = UserProfile.loginid(request)
+
+def get_login_user_id(request):
+    # Get the username of the logged-in user
+    username = request.user.username
+    # Find the logged-in user object
+    login_user = User.objects.get(username=username)
+    # Return the ID of the logged-in user
+    return login_user.id
+
+def get_vendor_name(userid,request):
+    try:
+        loginvendor = VendorProfile.objects.get(user=userid)
+        return loginvendor
+    except:
+        return render(request,'all_vehicle.html', {'error':'Profile Not Found'})
+
+def get_vehicle_list(loginvendor):
+    vehicletotalregnolist = []
+    vehiclesubscriptionlist=[]
+    global vehiclelistquery
+    vehiclelistquery = VehicleDetails.objects.filter(vendorid=loginvendor.vendorid)
+    print(vehiclelistquery)
+    for vehicle in vehiclelistquery:
+        vehicletotalregnolist.append(vehicle.vehicleregno)
+    print("total registration no :",vehicletotalregnolist)
+    return vehicletotalregnolist
+    pass
+    
 
 
 class Login(View):
@@ -48,28 +77,30 @@ class HomeApp(View):
 class all_vehicle(View):
     
     def get(self, request):
-        #---------------------------------login user------------------
+        #---------------------------------get login user------------------
         user = request.user.username
         #---------------------------------find loginuser ID-----------
-        loginuser = User.objects.get(username=user)
-        userid = int(loginuser.id)
+        #loginuser = User.objects.get(username=user)
+        userid = int(get_login_user_id(request))
         #print(userid)
         #userid=2
         #---------------------------------find login vendor name by ID-------
-        try:
+        '''try:
             loginvendor = VendorProfile.objects.get(user=userid)
             #print(loginvendor.vendorid)
         except:
-            return render(request,'all_vehicle.html', {'error':'Profile Not Found'})
-        
+            return render(request,'all_vehicle.html', {'error':'Profile Not Found'})'''
+        loginvendor = get_vendor_name(userid, request)
         #--------------------------------
-        vehicletotalregnolist = []
+        '''vehicletotalregnolist = []
         vehiclesubscriptionlist=[]
         vehiclelistquery = VehicleDetails.objects.filter(vendorid=loginvendor.vendorid)
         print(vehiclelistquery)
         for vehiclelist in vehiclelistquery:
             vehicletotalregnolist.append(vehiclelist.vehicleregno)
-        print("total registration no :",vehicletotalregnolist)
+        print("total registration no :",vehicletotalregnolist)'''
+        vehicletotalregnolist = get_vehicle_list(loginvendor)
+        
         
         
         
@@ -222,7 +253,17 @@ class all_vehicle(View):
     
 class vehicle_directory(View):
     def get(self, request):
-        return render(request,'vehicle_directory.html')
+        user = request.user.username
+        userid = int(get_login_user_id(request))
+        loginvendor = get_vendor_name(userid, request)
+        vehicletotalregnolist = get_vehicle_list(loginvendor)
+        
+        
+        
+        context = {
+            'vechiledetails':vehiclelistquery
+        }
+        return render(request,'vehicle_directory.html',context)
 
 class vehicle_group(View):
     def get(self, request):

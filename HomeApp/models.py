@@ -15,6 +15,9 @@ class UserProfile(models.Model):
     
     def __str__(self):
         return str(self.user)
+    '''def loginid(self,username):
+        user = UserProfile.objects.get(user=username)
+        return user.id'''
 
 class CountryCodeDetails(models.Model):
     countryname = models.CharField(_("Vendor Country Name"), max_length=25)
@@ -30,7 +33,7 @@ class vehiclemake(models.Model):
         return self.vehiclemake
     
 class vehiclefueltype(models.Model):
-    fueltype = models.CharField(_("Vehicle Make"), max_length=50, primary_key=True)
+    fueltype = models.CharField(_("Vehicle Fuel Type"), max_length=50, primary_key=True)
     
     def __str__(self):
         return self.fueltype
@@ -76,9 +79,10 @@ class VehicleDetails(models.Model):
     vehicletype = models.CharField(_("Vehicle Type"), max_length=50)
     vehicleimage = models.ImageField(_("Vehicle Image"), upload_to=None, null= True, blank= True, height_field=None, width_field=None, max_length=None)
     odometerreading = models.IntegerField(_("Vehicle Odometer Reading"))
-    vehiclemake = models.OneToOneField(vehiclemake, on_delete=models.CASCADE)
+    vehiclemake = models.ForeignKey(vehiclemake, on_delete=models.CASCADE)
     modelyear = models.IntegerField(_("Vehicle Model Year"))
     chessisno = models.CharField(_("Vehicle Chassis No"), max_length=50)
+    
     expectmileage = models.IntegerField(_("Expected Mileage"))
     isdelete = models.BooleanField(_(" Delete or Not"))
     createdat = models.DateTimeField(_("Created At"),auto_now_add=True)

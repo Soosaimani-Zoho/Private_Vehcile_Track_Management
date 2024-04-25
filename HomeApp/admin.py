@@ -9,6 +9,8 @@ from .models import (
     VendorProfile,
     vehiclemake,
     vehiclegroup,
+    vehiclefueltype,
+    
 )
 
 
@@ -17,7 +19,8 @@ class classuserprofile(admin.ModelAdmin):
 admin.site.register(UserProfile, classuserprofile)
     
 class classvehicledetails(admin.ModelAdmin):
-    list_display = ['vehiclename','vehicleregno','vehicletype']
+    #list_display = ['vehiclename','vehicleregno','vehicletype']
+    list_display = [field.name for field in VehicleDetails._meta.fields]
 #admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(VehicleDetails, classvehicledetails)
 
@@ -46,3 +49,7 @@ admin.site.register(vehiclemake, classvehiclemake)
 class classvehiclegroup(admin.ModelAdmin):
     list_display = [field.name for field in vehiclegroup._meta.fields]
 admin.site.register(vehiclegroup, classvehiclegroup)
+
+class classvehiclefueltype(admin.ModelAdmin):
+    list_display = [field.name for field in vehiclefueltype._meta.fields]
+admin.site.register(vehiclefueltype,classvehiclefueltype)

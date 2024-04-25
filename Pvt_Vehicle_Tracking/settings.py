@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -78,16 +79,20 @@ WSGI_APPLICATION = 'Pvt_Vehicle_Tracking.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'Fleet_Management', 
         'USER': 'postgres',
-        'PASSWORD': 'root',
+        'PASSWORD': 'password',
         'HOST': 'localhost', 
         'PORT': '5432',
     }
-}
+}'''
+
+DATABASES = {
+    'default': dj_database_url.config(default='postgres://spnkqbzq:xGcWVNUr_Wd33gmLk9ovlvJ4fQ7ftYyb@floppy.db.elephantsql.com/spnkqbzq')
+} # elephantSQL connection is good work. but store data by post method only.
 
 
 # Password validation
