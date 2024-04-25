@@ -7,6 +7,8 @@ from .models import (
     UserProfile,
     VehicleDetails,
     VendorProfile,
+    vehiclemake,
+    vehiclegroup,
 )
 
 
@@ -36,3 +38,11 @@ admin.site.register(VendorProfile,classvendorprofile)
 class classgpsdevicestatus(admin.ModelAdmin):
     list_display = [field.name for field in GPSDeviceStatus._meta.fields]
 admin.site.register(GPSDeviceStatus, classgpsdevicestatus)
+
+class classvehiclemake(admin.ModelAdmin):
+    list_display = [field.name for field in vehiclemake._meta.fields]
+admin.site.register(vehiclemake, classvehiclemake)
+
+class classvehiclegroup(admin.ModelAdmin):
+    list_display = [field.name for field in vehiclegroup._meta.fields]
+admin.site.register(vehiclegroup, classvehiclegroup)
