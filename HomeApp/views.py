@@ -2,6 +2,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render  #, HttpResponse
 from django.views import View
+import datetime
+from datetime import date
+from datetime import datetime
+import json
 
 from .models import (
     GPSDeviceDetails,
@@ -42,20 +46,31 @@ class HomeApp(View):
 class all_vehicle(View):
     
     def get(self, request):
+        #---------------------------------login user------------------
         user = request.user.username
+        #---------------------------------find loginuser ID-----------
         loginuser = User.objects.get(username=user)
-        userid = int(loginuser.id) + 1
+        userid = int(loginuser.id)
         #print(userid)
         #userid=2
-        loginvendor = VendorProfile.objects.get(user=userid)
-        #print(loginvendor.vendorid)
+        #---------------------------------find login vendor name by ID-------
+        try:
+            loginvendor = VendorProfile.objects.get(user=userid)
+            #print(loginvendor.vendorid)
+        except:
+            return render(request,'all_vehicle.html', {'error':'Profile Not Found'})
         
+        #--------------------------------
         vehicletotalregnolist = []
+        vehiclesubscriptionlist=[]
         vehiclelistquery = VehicleDetails.objects.filter(vendorid=loginvendor.vendorid)
         print(vehiclelistquery)
         for vehiclelist in vehiclelistquery:
             vehicletotalregnolist.append(vehiclelist.vehicleregno)
         print("total registration no :",vehicletotalregnolist)
+        
+        
+        
             
         
         vehicletotalcount = len(vehiclelistquery)
@@ -63,17 +78,30 @@ class all_vehicle(View):
         
         gpsdevicelist = []
         gpsdeviceidlist = []
+        gpssubscriptionlist=[]
         for vehiclename in vehiclelistquery:
             query = GPSDeviceDetails.objects.filter(vehiclename = vehiclename)
             for gps_device in query:
                 #print(gps_device.id)
                 gpsdevicelist.append(gps_device.deviceserialno)
                 gpsdeviceidlist.append(gps_device.id)
+                gpssubscriptionlist.append(gps_device.expiredat)
+        
+        [print(date_obj.date()) for date_obj in gpssubscriptionlist]
+        #print(dates)
+        times = [date_obj.time() for date_obj in gpssubscriptionlist]
+        
+        today = datetime.now()
+        devregwithsubexpirty = [(regno, subscription_date, today) for regno, subscription_date in zip(vehicletotalregnolist, gpssubscriptionlist)]
+        print(devregwithsubexpirty)
+
+        #print("Dates:", dates)
+        #print("Times:", times)
         
         print("GPS Device Found : " ,gpsdevicelist)
         print("ID is :", gpsdeviceidlist)
         totalgpsdeviceserialno = len(gpsdevicelist)
-        
+        print("gps subscription date",gpssubscriptionlist)
         
         
         #gpsdevicestatuslist =[]
@@ -119,14 +147,73 @@ class all_vehicle(View):
                 gps_data[gpsdevice]['gsmstrength'].append(gpsstatus.gsmstrength)
                 gps_data[gpsdevice]['lat'].append(gpsstatus.lat)
                 gps_data[gpsdevice]['long'].append(gpsstatus.long)
-
-        print(gps_data)      
+        gpsdata_json = json.dumps(gps_data)
+        #print(gps_data)
+        #print(gps_data.get(1)) 
+        #print(gps_data.get(2))
+        #print(gps_data.get(1).get('moving'))
+        movecounttrue= 0
+        movecountfalse=0
+        stopcountertrue=0
+        idllingcountertrue=0
+        offlinecountertrue=0
+        #nodevicecountertrue=0
+        subscripexpcountertrue=0
+        latitude_list = []
+        longitude_list = []
+        location_list =[]
+        
+        for key, value in gps_data.items():            
+            latitude_list.append(value['lat'][0])            
+            longitude_list.append(value['long'][0])
+            location_list.append(value['location'][0])
+        coordinates = zip(latitude_list, longitude_list,vehicletotalregnolist,latitude_list,longitude_list, location_list) # now its create as object
+        
+        
+        print("Latitude 1:", latitude_list[0], "Longitude 1:", longitude_list[0])
+        print("Latitude 2:", latitude_list[1], "Longitude 2:", longitude_list[1])
+        print("Latitude 3:", latitude_list[2], "Longitude 3:", longitude_list[2])
+        #print(coordinates)
+        
+        for key,value in gps_data.items():
+            if 'moving' in value:
+                move_value = value['moving']
+                if True in move_value:
+                    movecounttrue += 1 
+                '''elif False in move_value:
+                    movecountfalse += 1'''
+            if 'stopped' in value:
+                stop_value = value['stopped']
+                if True in stop_value:
+                    stopcountertrue += 1
+            if 'idlling' in value:
+                idle_value = value['idlling']
+                if True in idle_value:
+                    idllingcountertrue += 1
+            if 'offline' in value:
+                offline_value = value['offline']
+                if True in offline_value:
+                    offlinecountertrue += 1
+            if 'subsexpired' in value:
+                subexpir_value = value['subsexpired']
+                if True in subexpir_value:
+                    subscripexpcountertrue += 1
+            
+                
+        
+        
+        #print(movecounttrue)
+        #print(stopcountertrue)
+        #print(movecountfalse)
         #print(gpsdevicestatuslist)
         #print(query)
         #gpsdevicedetailsquery = GPSDeviceDetails.object.filter()
         context = {
             'user': user, 'totalvehicle':vehicletotalcount, 'vehicletotalregnolist':vehicletotalregnolist, 
-            'totalgpsdevice':totalgpsdeviceserialno, 'gpsdevicelist':gpsdevicelist,'gpsdata': gps_data
+            'totalgpsdevice':totalgpsdeviceserialno, 'gpsdevicelist':gpsdevicelist,'gpsdata': gps_data,
+            'moving':movecounttrue,'stopped':stopcountertrue,'idlling':idllingcountertrue,'offline':offlinecountertrue,
+            'subscriptionexpired':subscripexpcountertrue, 'regnowithexpiry':devregwithsubexpirty, 'devicelatlist':latitude_list,
+            'devicelonglisst':longitude_list, 'gpscoordinates':coordinates
         }
         return render(request,'all_vehicle.html', context)
     
