@@ -172,7 +172,7 @@ class all_vehicle(View):
         
         print("Latitude 1:", latitude_list[0], "Longitude 1:", longitude_list[0])
         print("Latitude 2:", latitude_list[1], "Longitude 2:", longitude_list[1])
-        print("Latitude 3:", latitude_list[2], "Longitude 3:", longitude_list[2])
+        #print("Latitude 3:", latitude_list[2], "Longitude 3:", longitude_list[2])
         #print(coordinates)
         
         for key,value in gps_data.items():
