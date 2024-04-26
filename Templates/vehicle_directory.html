@@ -19,7 +19,7 @@
                 <li><button class="dropdown-item" type="button">Update Vehicle Details in Bulk</button></li>
               </ul>
            
-            <button type="button" class="btn btn-outline-success rounded-pill"> + Add Vehicle</button>
+            <button type="button" class="btn btn-outline-success rounded-pill"> <a href="">+ Add Vehicle</a></button>
             <button type="button" class="btn btn-outline-success rounded-pill"><i class="bx bxs-download"></i></button>
           </div>
           
@@ -36,50 +36,90 @@
             <div class="card-body">
               <h5 class="card-title">Datatables</h5>
               <!--<p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable. Check for <a href="https://fiduswriter.github.io/simple-datatables/demos/" target="_blank">more examples</a>.</p>-->
-
+              <form method='post'>
+                {% csrf_token %}
               <!-- Table with stripped rows -->
-              <table class="table datatable table-hover">
-                <thead>
-                  <tr>
-                    <th style="text-align: center;">Vehicle <b>N</b>ame</th>
-                    <th style="text-align: center;">Registration No.</th>
-                    <th style="text-align: center;">Vehicle Image</th>
-                    <th style="text-align: center;">Odometer Reading</th>
-                    <!--<th data-type="date" data-format="YYYY/DD/MM">Start Date</th>-->
-                    <th style="text-align: center;">Vehicle Make</th>
-                    <th style="text-align: center;">Model Year</th>
-                    <th style="text-align: center;">VIN / Chassis No</th>
-                    <th style="text-align: center;">Fuel Type</th>
-                    <th style="text-align: center;">Expected Mileage</th>
-                    <th style="text-align: center;">Actions</th>
+                <table class="table datatable table-hover">
+                  <thead>
+                    <tr>
+                      <th style="text-align: center;">Vehicle <b>N</b>ame</th>
+                      <th style="text-align: center;">Registration No.</th>
+                      <th style="text-align: center;">Vehicle Type</th>
+                      <th style="text-align: center;">Vehicle Image</th>
+                      <th style="text-align: center;">Odometer Reading</th>
+                      <!--<th data-type="date" data-format="YYYY/DD/MM">Start Date</th>-->
+                      <th style="text-align: center;">Vehicle Make</th>
+                      <th style="text-align: center;">Model Year</th>
+                      <th style="text-align: center;">VIN / Chassis No</th>
+                      <th style="text-align: center;">Fuel Type</th>
+                      <th style="text-align: center;">Expected Mileage</th>
+                      <th style="text-align: center;">Actions</th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for vehicle in vechiledetails %}
                     
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for vehicle in vechiledetails %}
-                  <tr>
-                    <td>{{vehicle.vehiclename}}</td>
-                    <td>{{vehicle.vehicleregno}}</td>
-                    <td>{{vehicle.vehicleimage}}</td>
-                    <td>{{vehicle.odometerreading}}</td>
-                    <td>{{vehicle.vehiclemake}}</td>
-                    <td>{{vehicle.modelyear}}</td>
-                    <td>{{vehicle.chessisno}}</td>
-                    <td>1</td>
-                    <td>{{vehicle.expectmileage}}</td>                    
-                    <th style="text-align: center;"><i class="bi bi-pencil-square"></i></th>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+                    <tr>
+                      <td name ='vehiclename'>{{vehicle.vehiclename}}</td>
+                      <td name ='vehicleregno'>{{vehicle.vehicleregno}}</td>
+                      <td name ='vehicletype'>{{vehicle.vehicletype}}</td>
+                      <td name ='vehicleimage'>{{vehicle.vehicleimage}}</td>
+                      <td name ='odometerreading'>{{vehicle.odometerreading}}</td>
+                      <td name ='vehiclemake'>{{vehicle.vehiclemake}}</td>
+                      <td name ='modelyear'>{{vehicle.modelyear}}</td>
+                      <td name ='chessisno'>{{vehicle.chessisno}}</td>
+                      <td >1</td>
+                      <td>{{vehicle.expectmileage}}</td>                    
+                      <th style="text-align: center;">
+                        <!--<input type="hidden" name="vehicle_id" value="{{ vehicle.id }}">
+                        <button type="submit" style="background: none; border: none;">
+                            <i class="bi bi-pencil-square"></i>
+                        </button>-->
+                        <!--<button type="button" name="vehicleid" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#verticalycentered">
+                          Edit                          
+                        </button>-->
+                        <button type="submit" name="vehicleid" class="btn btn-primary" value="{{ vehicle.id }}">
+                          Edit                          
+                        </button>
+                        
+                      </th>
+                      
+                    </tr>
+                    
+                    {% endfor %}
+                  </tbody>
+                </table>
               <!-- End Table with stripped rows -->
-
+            </form>
             </div>
           </div>
 
         </div>
       </div>
+      
+      
+      <div class="modal fade" id="verticalycentered" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title"><b>Edit {{vehicle.vehiclename}} Details</b></h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Non omnis incidunt qui sed occaecati magni asperiores est mollitia. Soluta at et reprehenderit. Placeat autem numquam et fuga numquam. Tempora in facere consequatur sit dolor ipsum. Consequatur nemo amet incidunt est facilis. Dolorem neque recusandae quo sit molestias sint dignissimos.
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div><!-- End Vertically centered Modal-->
     </section>
 
+
+    
+  
 {% endblock %}
  

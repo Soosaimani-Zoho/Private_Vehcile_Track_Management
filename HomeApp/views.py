@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render  #, HttpResponse
+from django.shortcuts import redirect, render  , HttpResponse
 from django.views import View
 import datetime
 from datetime import date
@@ -17,6 +17,7 @@ from .models import (
 
 vehicle_reg_numbers = VehicleDetails.get_vehicleregno_list()  # to get vechile regno list from db
 #loingid = UserProfile.loginid(request)
+
 
 def get_login_user_id(request):
     # Get the username of the logged-in user
@@ -256,14 +257,37 @@ class vehicle_directory(View):
         user = request.user.username
         userid = int(get_login_user_id(request))
         loginvendor = get_vendor_name(userid, request)
-        vehicletotalregnolist = get_vehicle_list(loginvendor)
-        
-        
+        vehicletotalregnolist = get_vehicle_list(loginvendor) 
         
         context = {
             'vechiledetails':vehiclelistquery
         }
         return render(request,'vehicle_directory.html',context)
+    def post(self,request):
+        vehicle_id = request.POST.get('vehicleid')
+        print('Vehicle ID:', vehicle_id)
+        vehicle = VehicleDetails.objects.get(id=vehicle_id)
+        context = {
+        'vehiclename' : vehicle.vehiclename,
+        'vehicleregno' : vehicle.vehicleregno,
+        'vehicletype' : vehicle.vehicletype,
+        'vehicleimage' : vehicle.vehicleimage,
+        'odometerreading' : vehicle.odometerreading,
+        'vehiclemake' : vehicle.vehiclemake,
+        'modelyear' : vehicle.modelyear,
+        'chessisno' : vehicle.chessisno,
+        
+        'expectmileage' :vehicle.expectmileage,
+        'isdelete' : vehicle.isdelete
+        }
+            
+        
+
+        return render(request,'vehicle_directory_edit.html',context)
+class vehicle_directory_edit(View):
+    def post(self, request):
+        
+        pass
 
 class vehicle_group(View):
     def get(self, request):

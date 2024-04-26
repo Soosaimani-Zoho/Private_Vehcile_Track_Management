@@ -98,6 +98,8 @@ class VehicleDetails(models.Model):
         return cls.objects.values_list('vehicleregno', flat=True)
     
     
+        
+    
 class GPSDeviceDetails(models.Model):
     vehiclename = models.OneToOneField(VehicleDetails, on_delete=models.CASCADE)
     deviceserialno = models.CharField(_("GPSDevice Serial No"), max_length=50,unique=True)
