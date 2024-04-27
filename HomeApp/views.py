@@ -15,6 +15,8 @@ from .models import (
     VendorProfile,
 )
 
+from .forms import vehicledetailsform
+
 vehicle_reg_numbers = VehicleDetails.get_vehicleregno_list()  # to get vechile regno list from db
 #loingid = UserProfile.loginid(request)
 
@@ -29,7 +31,9 @@ def get_login_user_id(request):
 
 def get_vendor_name(userid,request):
     try:
+        #global loginvendor
         loginvendor = VendorProfile.objects.get(user=userid)
+        print("loginvendor", loginvendor)
         return loginvendor
     except:
         return render(request,'all_vehicle.html', {'error':'Profile Not Found'})
@@ -48,32 +52,15 @@ def get_vehicle_list(loginvendor):
     
 
 
-class Login(View):
-    def get(self, request):
-        #return HttpResponse("welcome")
-        return render(request, 'login.html')
-    def post(self, request):
-        username = request.POST['username']
-        password = request.POST['password']
-        
-        user = authenticate(username=username, password=password)
-        
-        if user is not None:
-            login(request, user)
-            print("User Found")
-            return redirect('dashboard')
-        else:
-            return render(request, 'login.html', {'error':'Invalid Username and Password'})
 
-def logout_view(request):
-    logout(request)
-    return redirect('Login')
+
+
 
 
 class HomeApp(View):
     def get(self, request):
         #return HttpResponse("welcome")
-        return render(request, 'index.html')
+        return render(request, 'gotoz\index.html')
     
 class all_vehicle(View):
     
@@ -284,10 +271,27 @@ class vehicle_directory(View):
         
 
         return render(request,'vehicle_directory_edit.html',context)
-class vehicle_directory_edit(View):
-    def post(self, request):
+class vehicle_directory_add(View):
+    def get(self, request):
+        user = request.user.username
+        userid = int(get_login_user_id(request))
+        loginvendor = get_vendor_name(userid, request)
+        print("loginvendor",loginvendor)
         
+        form = vehicledetailsform()
+        
+        return render(request, 'vehicle_directory_add.html',{'form':form, 'loginvendor':loginvendor})
         pass
+    def post(self,request):
+        
+        
+        form = vehicledetailsform(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+        else:
+            form = vehicledetailsform()
+        return render(request, 'vehicle_directory_add.html', {'form': form})
+        
 
 class vehicle_group(View):
     def get(self, request):
