@@ -10,7 +10,7 @@ from .models import (
     vehiclemake,
     vehiclegroup,
     vehiclefueltype,
-    
+    DriverDetails,
 )
 
 
@@ -53,3 +53,7 @@ admin.site.register(vehiclegroup, classvehiclegroup)
 class classvehiclefueltype(admin.ModelAdmin):
     list_display = [field.name for field in vehiclefueltype._meta.fields]
 admin.site.register(vehiclefueltype,classvehiclefueltype)
+
+class classdriverdetails(admin.ModelAdmin):
+    list_display = [field.name for field in DriverDetails._meta.fields]
+admin.site.register(DriverDetails, classdriverdetails)

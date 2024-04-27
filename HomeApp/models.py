@@ -137,10 +137,21 @@ class GPSDeviceStatus(models.Model):
 class DriverDetails(models.Model):
     drivername = models.CharField(_("Driver Name"), max_length=50)
     phoneno1 = models.CharField(_("Driver Mob No1"), max_length=50)
-    phoneno2 = models.CharField(_("Driver Mob No2"), max_length=50)
+    phoneno2 = models.CharField(_("Driver Mob No2"), max_length=50, null=True)
+    vehiclename = models.CharField(_("Vehicle Name"), max_length=50, null=True)
     vehicleregno = models.ForeignKey(VehicleDetails, on_delete=models.CASCADE)
     licenseno = models.CharField(_("License No"), max_length=50)
-    guarantorname = models.CharField(_("Guarantor Name"), max_length=50)
-    guarandorphoneno = models.CharField(_("Guarantor Mob No"), max_length=50)
+    guarantorname = models.CharField(_("Guarantor Name"), max_length=50, null=True)
+    guarandorphoneno = models.CharField(_("Guarantor Mob No"), max_length=50, null=True)
+    countrycode = models.OneToOneField(CountryCodeDetails, on_delete=models.CASCADE)
+    aadharno = models.CharField(_("Aadhar Number"), max_length=50)
+    licenseissuedate = models.DateField(auto_now=False, auto_now_add=False)
+    licenseexpirtydate = models.DateField(auto_now=False, auto_now_add=False)
+    driverid = models.CharField(_("Driver ID"), max_length=50)
+    driverimage = models.ImageField(_("Driver Image"), upload_to=None, null= True, blank= True, height_field=None, width_field=None, max_length=None)
+    pancardimage = models.ImageField(_("pancard Image"), upload_to=None, null= True, blank= True, height_field=None, width_field=None, max_length=None)
+    driverlicense = models.ImageField(_("Driver license"), upload_to=None, null= True, blank= True, height_field=None, width_field=None, max_length=None)
+    drivermisc = models.ImageField(_("Driver Miscellaneous"), upload_to=None, null= True, blank= True, height_field=None, width_field=None, max_length=None)
+    
     
     

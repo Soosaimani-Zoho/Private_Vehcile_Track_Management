@@ -300,7 +300,14 @@ class vehicle_group(View):
 class vehicle_states(View):
     def get(self, request):
         return render(request,'vehicle_states.html')
-    
+
+class my_driver(View):
+    def get(self, request):
+        context = {
+            
+        }
+        return render(request,'my_driver.html',context)
+  
 class all_trips(View):
     def get(self, request):
         return render(request,'all_trips.html')
