@@ -133,4 +133,14 @@ class GPSDeviceStatus(models.Model):
     def __str__(self):
         return f"{self.lat},{self.long}"
     
+
+class DriverDetails(models.Model):
+    drivername = models.CharField(_("Driver Name"), max_length=50)
+    phoneno1 = models.CharField(_("Driver Mob No1"), max_length=50)
+    phoneno2 = models.CharField(_("Driver Mob No2"), max_length=50)
+    vehicleregno = models.ForeignKey(VehicleDetails, on_delete=models.CASCADE)
+    licenseno = models.CharField(_("License No"), max_length=50)
+    guarantorname = models.CharField(_("Guarantor Name"), max_length=50)
+    guarandorphoneno = models.CharField(_("Guarantor Mob No"), max_length=50)
+    
     
