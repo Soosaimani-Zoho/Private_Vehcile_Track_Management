@@ -12,10 +12,10 @@
             
              
            
-            <a class="btn btn-outline-success rounded-pill" href="#">Bulk Upload</a>
-            <a class="btn btn-outline-success rounded-pill" href="#">+ Add Driver</a>
-            <!--<a class="btn btn-outline-success rounded-pill" href="#">Download</a>-->
-            <button type="button" class="btn btn-outline-success rounded-pill"><i class="bx bxs-download"></i></button>
+            <a class="btn btn-outline-primary rounded-pill" href="#">Bulk Upload</a>
+            <a class="btn btn-outline-primary rounded-pill" href="/gotoz/my_driver/add">+ Add Driver</a>
+            <!--<a class="btn btn-outline-primary rounded-pill" href="#">Download</a>-->
+            <button type="button" class="btn btn-outline-primary rounded-pill"><i class="bx bxs-download"></i></button>
           </div>
           
         </div>
@@ -40,8 +40,8 @@
                       <th style="text-align: center;">S.No.</th>
                       <th style="text-align: center;">Driver Name</th>
                       <th style="text-align: center;">Phone No</th>
-                      <th style="text-align: center;">Vehicle Name</th>
-                      <th style="text-align: center;">Vehicle No</th>
+                      
+                      
                       <th style="text-align: center;">Vehicle Reg.No</th>
                       <th style="text-align: center;">License No</th>
                       <th style="text-align: center;">Guarantor Name</th>
@@ -52,17 +52,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for index, driver in driverdetails|dictsort:"id" %}
+                    {% for driver in driverdetails %}
                     
                     <tr>
-                      <td>{{ index }}</td>
-                      <td name ='vehiclename'>{{vehicle.drivername}}</td>
-                      <td name ='vehicleregno'>{{vehicle.phoneno1}}</td>
-                      <td name ='vehicletype'>{{vehicle.vehiclename}}</td>
-                      <td name ='vehicletype'>{{vehicle.vehicleregno}}</td>
-                      <td name ='vehicleimage'>{{vehicle.licenseno}}</td>
-                      <td name ='odometerreading'>{{vehicle.guarantorname}}</td>                 
+                      <td></td>
+                      <td name ='vehiclename'>{{driver.drivername}}</td>
+                      <td name ='vehicleregno'>{{driver.phoneno1}}</td>
                       
+                      <td name ='vehicletype'>{{driver.vehicleregno}}</td>
+                      <td name ='vehicleimage'>{{driver.licenseno}}</td>
+                      <td name ='odometerreading'>{{driver.guarantorname}}</td>                 
+                      <td name ='odometerreading'>{{driver.guarandorphoneno}}</td>
+                      <td><a type="button" class="btn btn-primary" name="{{driver.id}}">Edit</a></td>
                         
                       
                       

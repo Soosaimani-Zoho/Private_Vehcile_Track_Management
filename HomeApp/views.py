@@ -13,9 +13,10 @@ from .models import (
     UserProfile,
     VehicleDetails,
     VendorProfile,
+    DriverDetails
 )
 
-from .forms import vehicledetailsform
+from .forms import vehicledetailsform, DriverdetailsForm
 
 vehicle_reg_numbers = VehicleDetails.get_vehicleregno_list()  # to get vechile regno list from db
 #loingid = UserProfile.loginid(request)
@@ -303,10 +304,24 @@ class vehicle_states(View):
 
 class my_driver(View):
     def get(self, request):
+        driverdetails = DriverDetails.objects.all()
+        #print(driverdetails)
         context = {
-            
+            'driverdetails':driverdetails,
         }
         return render(request,'my_driver.html',context)
+
+class my_driver_add(View):
+    def get(self, request):        
+        return render(request, 'my_driver_add.html')
+    def post(self, request):
+        form = DriverdetailsForm(request.POST)
+        if form.is_valid():
+            form.save()  # This will save the form data into the database
+            print("Form saved successfully")
+        else:
+            print("not valid")
+        return render(request, 'my_driver_add.html', {'form':form})
   
 class all_trips(View):
     def get(self, request):

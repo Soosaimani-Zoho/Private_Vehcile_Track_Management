@@ -1,0 +1,381 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Add Driver Details</h5>
+          
+          <!--  Form Elements -->
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row mb-3">
+              <label for="drivername" class="col-sm-2 col-form-label">Driver Name.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="drivername">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="driverid" class="col-sm-2 col-form-label">Driver ID.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="driverid">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="countrycode" class="col-sm-2 col-form-label">Country Code</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="countrycode">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="phoneno1" class="col-sm-2 col-form-label">Mobile No.1</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="phoneno1">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="phoneno2" class="col-sm-2 col-form-label">Mobile No.2</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="phoneno2">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="vehicleregno" class="col-sm-2 col-form-label">Vehicle Registation No.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="vehicleregno">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="licenseno" class="col-sm-2 col-form-label">License No.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="licenseno">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="guarantorname" class="col-sm-2 col-form-label">Guarantor Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="guarantorname">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="guarandorphoneno" class="col-sm-2 col-form-label">Guarandor Mob.No.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="guarandorphoneno">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="aadharno" class="col-sm-2 col-form-label">Aadhar No</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="aadharno">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="licenseissuedate" class="col-sm-2 col-form-label">License Issue Date</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="licenseissuedate">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="licenseexpirtydate" class="col-sm-2 col-form-label">License Expiry Date</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="licenseexpirtydate">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="driverimage" class="col-sm-2 col-form-label">Driver Image</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile" name="driverimage">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="pancardimage" class="col-sm-2 col-form-label">PAN Card Image</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile" name="pancardimage">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="driverlicense" class="col-sm-2 col-form-label">Driver License</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile" name="driverlicense">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="drivermisc" class="col-sm-2 col-form-label">Other Misc.</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile" name="drivermisc">
+              </div>
+            </div>
+            <div class="row mb-3 justify-content-center">              
+              <div class="col-sm-10 text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/gotoz/my_driver" class="btn btn-secondary">Cancel</a>
+              </div>
+            </div>
+          </form>
+            
+</section>
+
+ {% endblock %}
+ 
+            <div class="row mb-3">
+              <label for="{{form.vendorid.id_for_label}}" class="col-sm-2 col-form-label">Name.</label>
+              <div class="col-sm-10">
+                <!--<input type="text" class="form-control" name="{{ form.vehicleregno }}">-->
+                <input type="text" class="form-control" name="{{ loginvendor }}" value="{{loginvendor}}" disabled>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="{{form.vehiclename.id_for_label}}" class="col-sm-2 col-form-label">Vehicle Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.vehiclename.name }}">
+                <!--<input type="text" class="form-control" name="">-->
+                
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.vehicleregno.id_for_label}}" class="col-sm-2 col-form-label">Registratin No.</label>
+              <div class="col-sm-10">
+                <!--<input type="text" class="form-control" name="{{ form.vehicleregno }}">-->
+                <input type="text" class="form-control" name="{{ form.vehicleregno.name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.vehicletype.id_for_label}}" class="col-sm-2 col-form-label">Vehicle Type</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.vehicletype.name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.vehicleimage.id_for_label}}" class="col-sm-2 col-form-label">Vehicle Image</label>
+              <div class="col-sm-10">
+                <input class="form-control" type="file" id="formFile" name="{{form.vehicleimage.name}}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.odometerreading.id_for_label}}" class="col-sm-2 col-form-label">Odometer Reading</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.odometerreading.name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.vehiclemake.id_for_label}}" class="col-sm-2 col-form-label">Vehicle make</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.vehiclemake.name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.modelyear.id_for_label}}" class="col-sm-2 col-form-label">Model Year</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.modelyear.name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.chessisno.id_for_label}}" class="col-sm-2 col-form-label">Chessis No.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.chessisno.name }}">
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="{{form.chessisno.id_for_label}}" class="col-sm-2 col-form-label">Chessis No.</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.chessisno.name }}">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="{{form.expectmileage.id_for_label}}" class="col-sm-2 col-form-label">Expected Mileage</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="{{ form.expectmileage.name }}">
+              </div>
+            </div>
+            <div class="form-check" style="display: none;">
+              <input class="form-check-input" type="checkbox" id="gridCheck1" name="{{ form.isdelete.name }}">
+              <label class="form-check-label" for="{{form.isdelete.id_for_label}}">
+                Delete
+              </label>
+            </div>
+            
+
+            <div class="row mb-3 justify-content-center">
+              
+              <div class="col-sm-10 text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a href="/gotoz/vehicle_directory" class="btn btn-secondary">Cancel</a>
+              </div>
+            </div>
+
+          </form><!-- End  Form Elements -->
+          
+        </div>
+      </div>
+
+    </div>
+
+    
+  </div>
+
+
+
+
+
+
+
+<div>
+  <div class="row mb-3">
+    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="email" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputNumber" class="col-sm-2 col-form-label">Number</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputNumber" class="col-sm-2 col-form-label">File Upload</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="file" id="formFile">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
+    <div class="col-sm-10">
+      <input type="date" class="form-control">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
+    <div class="col-sm-10">
+      <input type="time" class="form-control">
+    </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <label for="inputColor" class="col-sm-2 col-form-label">Color Picker</label>
+    <div class="col-sm-10">
+      <input type="color" class="form-control form-control-color" id="exampleColorInput" value="#4154f1" title="Choose your color">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" style="height: 100px"></textarea>
+    </div>
+  </div>
+  <fieldset class="row mb-3">
+    <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
+        <label class="form-check-label" for="gridRadios1">
+          First radio
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+        <label class="form-check-label" for="gridRadios2">
+          Second radio
+        </label>
+      </div>
+      <div class="form-check disabled">
+        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios" value="option" disabled>
+        <label class="form-check-label" for="gridRadios3">
+          Third disabled radio
+        </label>
+      </div>
+    </div>
+  </fieldset>
+  <div class="row mb-3">
+    <legend class="col-form-label col-sm-2 pt-0">Checkboxes</legend>
+    <div class="col-sm-10">
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck1">
+        <label class="form-check-label" for="gridCheck1">
+          Example checkbox
+        </label>
+      </div>
+
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck2" checked>
+        <label class="form-check-label" for="gridCheck2">
+          Example checkbox 2
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="col-sm-2 col-form-label">Disabled</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" value="Read only / Disabled" disabled>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="col-sm-2 col-form-label">Select</label>
+    <div class="col-sm-10">
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <label class="col-sm-2 col-form-label">Multi Select</label>
+    <div class="col-sm-10">
+      <select class="form-select" multiple aria-label="multiple select example">
+        <option selected>Open this select menu</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+
+
+Add New Vehicle List
+Vendorid: 
+---------
+
+Vehicle Name: 
+
+Vehicle Reg No: 
+
+Vehicle Type: 
+
+Vehicle Image: No file chosen
+
+Vehicle Odometer Reading: 
+
+Vehiclemake: 
+---------
+
+Vehicle Model Year: 
+
+Vehicle Chassis No: 
+
+Expected Mileage: 
+
+Delete or Not: 
+

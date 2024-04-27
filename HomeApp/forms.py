@@ -1,5 +1,5 @@
 from django import forms
-from .models import VehicleDetails
+from .models import VehicleDetails, DriverDetails
 
 class vehicledetailsform(forms.ModelForm):
     class Meta:
@@ -12,3 +12,8 @@ class StopnameForm(forms.Form):
     stopname = forms.CharField(max_length=100)
 
 StopFormSet = formset_factory(StopnameForm, extra=1)  # You can set extra to control the number of initial forms
+
+class DriverdetailsForm(forms.ModelForm):
+    class Meta:
+        model = DriverDetails
+        fields = "__all__"

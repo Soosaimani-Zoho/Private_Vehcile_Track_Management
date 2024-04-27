@@ -7,6 +7,7 @@ from .views import (
     all_vehicle,
     vehicle_directory_add,
     my_driver,
+    my_driver_add,
     consigners,
     
     my_expances,
@@ -29,6 +30,7 @@ urlpatterns = [
     path('vehicle_group/',vehicle_group.as_view(), name='vehicle_group'),
     path('vehicle_states/',vehicle_states.as_view(),name='vehicle_states'),
     path('my_driver/',my_driver.as_view(),name='my_driver'),
+    path('my_driver/add',my_driver_add.as_view(),name='my_driver_add'),
     path('all_trips/',all_trips.as_view(),name='all_trips'),
     path('trip_schedules/',trip_schedules.as_view(),name='trip_schedules'),
     path('routes/',routes.as_view(),name='routes'),
