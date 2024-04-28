@@ -8,15 +8,17 @@ from datetime import datetime
 import json
 
 from .models import (
-    GPSDeviceDetails,
-    GPSDeviceStatus,
-    UserProfile,
-    VehicleDetails,
-    VendorProfile,
-    DriverDetails
-)
+                    GPSDeviceDetails,
+                    GPSDeviceStatus,
+                    UserProfile,
+                    VehicleDetails,
+                    VendorProfile,
+                    DriverDetails,
+                    RouteDetails
+    
+                    )
 
-from .forms import vehicledetailsform, DriverdetailsForm
+from .forms import vehicledetailsform, DriverdetailsForm, RouteDetailsForm
 
 vehicle_reg_numbers = VehicleDetails.get_vehicleregno_list()  # to get vechile regno list from db
 #loingid = UserProfile.loginid(request)
@@ -312,8 +314,9 @@ class my_driver(View):
         return render(request,'my_driver.html',context)
 
 class my_driver_add(View):
-    def get(self, request):        
-        return render(request, 'my_driver_add.html')
+    def get(self, request):
+        form = DriverdetailsForm()
+        return render(request, 'my_driver_add.html',{'form':form})
     def post(self, request):
         form = DriverdetailsForm(request.POST)
         if form.is_valid():
@@ -331,8 +334,29 @@ class trip_schedules(View):
     def get(self, request):
         return render(request, 'trip_schedules.html')
 class routes(View):
+    
     def get(self,request):
-        return render(request,'routes.html')
+        routedetails = RouteDetails.objects.all()
+        context = {
+            'allroutedetails':routedetails
+        }
+        return render(request,'routes.html',context)
+
+class routes_add(View):
+    def get(self, request):
+        form = RouteDetailsForm()        
+        return render(request, 'routes_add.html',{'form':form})
+    def post(self, request):
+        form = RouteDetailsForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print("Route Details Added")
+        else:
+            errors = form.errors
+            print("Form not valid error is :", errors)
+        return render(request,'routes_add.html',{'form':form})
+        
+        
     
 class consigners(View):
     def get(self, request):

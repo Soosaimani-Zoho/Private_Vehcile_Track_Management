@@ -1,0 +1,41 @@
+<!-- HTML template -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Stop Name from Map</title>
+    <script src="https://geocode.maps.co/reverse?lat=&lon=&api_key=662c76f86a5c0612601696teb295afa"></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 9.693205434993697, lng: 77.75649889639129}, 
+                zoom: 8
+            });
+
+            var marker = new google.maps.Marker({
+                map: map,
+                draggable: true
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                marker.setPosition(event.latLng);
+                var geocoder = new google.maps.Geocoder;
+                geocoder.geocode({'location': event.latLng}, function(results, status) {
+                    if (status === 'OK') {
+                        if (results[0]) {
+                            var stopName = results[0].formatted_address;
+                            document.getElementById('stopName').value = stopName;
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <div id="map" style="height: 400px; width: 100%;"></div>
+    <input type="text" id="stopName" name="stopName" placeholder="Stop Name">
+    <script>
+        initMap();
+    </script>
+</body>
+</html>

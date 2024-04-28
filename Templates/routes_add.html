@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="section">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Add Route Details</h5>
+          
+          <!--  Form Elements -->
+          <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="row mb-3">
+                {{ form.routeid.errors }}
+                <label for="{{ form.routeid.id_for_label }}" class="col-sm-2 col-form-label">Vehicle Route ID</label>
+                <div class="col-sm-10">
+                  {{ form.routeid }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.routename.errors }}
+                <label for="{{ form.routename.id_for_label }}" class="col-sm-2 col-form-label">Vehicle Route Name</label>
+                <div class="col-sm-10">
+                  {{ form.routename }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop1.errors }}
+                <label for="{{ form.stop1.id_for_label }}" class="col-sm-2 col-form-label">Stop Name1</label>
+                <div class="col-sm-10">
+                  {{ form.stop1 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop2.errors }}
+                <label for="{{ form.stop2.id_for_label }}" class="col-sm-2 col-form-label">Stop Name2</label>
+                <div class="col-sm-10">
+                  {{ form.stop2 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop3.errors }}
+                <label for="{{ form.stop3.id_for_label }}" class="col-sm-2 col-form-label">Stop Name3</label>
+                <div class="col-sm-10">
+                  {{ form.stop3 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop4.errors }}
+                <label for="{{ form.stop4.id_for_label }}" class="col-sm-2 col-form-label">Stop Name4</label>
+                <div class="col-sm-10">
+                  {{ form.stop4 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop5.errors }}
+                <label for="{{ form.stop5.id_for_label }}" class="col-sm-2 col-form-label">Stop Name5</label>
+                <div class="col-sm-10">
+                  {{ form.stop5 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop6.errors }}
+                <label for="{{ form.stop6.id_for_label }}" class="col-sm-2 col-form-label">Stop Name6</label>
+                <div class="col-sm-10">
+                  {{ form.stop6 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop7.errors }}
+                <label for="{{ form.stop7.id_for_label }}" class="col-sm-2 col-form-label">Stop Name7</label>
+                <div class="col-sm-10">
+                  {{ form.stop7 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop8.errors }}
+                <label for="{{ form.stop8.id_for_label }}" class="col-sm-2 col-form-label">Stop Name8</label>
+                <div class="col-sm-10">
+                  {{ form.stop8 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop9.errors }}
+                <label for="{{ form.stop9.id_for_label }}" class="col-sm-2 col-form-label">Stop Name9</label>
+                <div class="col-sm-10">
+                  {{ form.stop9 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop10.errors }}
+                <label for="{{ form.stop10.id_for_label }}" class="col-sm-2 col-form-label">Stop Name10</label>
+                <div class="col-sm-10">
+                  {{ form.stop10 }}
+                </div>
+              </div>
+               <div class="row mb-3">
+                {{ form.stop11.errors }}
+                <label for="{{ form.stop11.id_for_label }}" class="col-sm-2 col-form-label">Stop Name11</label>
+                <div class="col-sm-10">
+                  {{ form.stop11 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop12.errors }}
+                <label for="{{ form.stop12.id_for_label }}" class="col-sm-2 col-form-label">Stop Name12</label>
+                <div class="col-sm-10">
+                  {{ form.stop12 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop13.errors }}
+                <label for="{{ form.stop13.id_for_label }}" class="col-sm-2 col-form-label">Stop Name13</label>
+                <div class="col-sm-10">
+                  {{ form.stop13 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop14.errors }}
+                <label for="{{ form.stop14.id_for_label }}" class="col-sm-2 col-form-label">Stop Name14</label>
+                <div class="col-sm-10">
+                  {{ form.stop14 }}
+                </div>
+              </div>
+              <div class="row mb-3">
+                {{ form.stop15.errors }}
+                <label for="{{ form.stop15.id_for_label }}" class="col-sm-2 col-form-label">Stop Name15</label>
+                <div class="col-sm-10">
+                  {{ form.stop15 }}
+                </div>
+              </div>
+              <div class="row mb-3 justify-content-center">              
+                <div class="col-sm-10 text-center">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <a href="/gotoz/routes" class="btn btn-secondary">Cancel</a>
+                </div>
+              </div>
+
+
+             
+          </form>
+            
+</section>
+
+ {% endblock %}
+ 
+  

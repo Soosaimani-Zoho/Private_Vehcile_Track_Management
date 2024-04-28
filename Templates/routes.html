@@ -10,7 +10,7 @@
           <div class="col-lg-5 pb-3 pt-3 text-end">
             <button class="btn btn-warning rounded-pill btn-sm">Bulk Upload</button>
             <button class="btn btn-warning rounded-pill btn-sm">Filter</button>
-            <button class="btn btn-warning rounded-pill btn-sm">+ Add Vehicle Route</button>
+            <a class="btn btn-warning rounded-pill btn-sm" href="/gotoz/routes/add">+ Add Vehicle Route</a>
             <button class="btn btn-warning rounded-pill btn-sm">Download</button>
           </div>
         </div>
@@ -23,6 +23,7 @@
               <table class="table datatable table-hover">
                 <thead>
                   <tr>
+                    <th>Route ID</th>
                     <th>Name</th>
                     <th>Source</th>
                     <th>Desination</th>
@@ -30,12 +31,15 @@
                   </tr>
                 </thead>
                 <tbody>
+                  {% for routedetail in allroutedetails %}
                   <tr>
-                    <td>Erode to CBE</td>
+                    <td>{{routedetail.routeid}}</td>
+                    <td>{{routedetail.routename}}</td>
                     <td>TN00G0000</td>
                     <td>ERD</td>
                     <td><a href="#">Edit </a>/ <a href="#"> Delete</a></td>
                   </tr>
+                  {% endfor %}
                 </tbody>
 
                 </div>

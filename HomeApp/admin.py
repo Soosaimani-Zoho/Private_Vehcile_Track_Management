@@ -11,6 +11,8 @@ from .models import (
     vehiclegroup,
     vehiclefueltype,
     DriverDetails,
+    TripDetails,
+    RouteDetails,
 )
 
 
@@ -57,3 +59,11 @@ admin.site.register(vehiclefueltype,classvehiclefueltype)
 class classdriverdetails(admin.ModelAdmin):
     list_display = [field.name for field in DriverDetails._meta.fields]
 admin.site.register(DriverDetails, classdriverdetails)
+
+class classtripdetails(admin.ModelAdmin):
+    list_display = [field.name for field in TripDetails._meta.fields]
+admin.site.register(TripDetails,classtripdetails)
+
+class classrotuedetails(admin.ModelAdmin):
+    list_display = [field.name for field in RouteDetails._meta.fields]
+admin.site.register(RouteDetails,classrotuedetails)

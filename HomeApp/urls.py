@@ -12,6 +12,7 @@ from .views import (
     
     my_expances,
     routes,
+    routes_add,
     service_history,
     service_schedules,
     trip_schedules,
@@ -34,11 +35,12 @@ urlpatterns = [
     path('all_trips/',all_trips.as_view(),name='all_trips'),
     path('trip_schedules/',trip_schedules.as_view(),name='trip_schedules'),
     path('routes/',routes.as_view(),name='routes'),
+    path('routes/add/',routes_add.as_view(),name='routes_add'),
     path('consigners/',consigners.as_view(),name='consigners'),
     path('my_expances/',my_expances.as_view(),name='my_expances'),
     path('service_history/',service_history.as_view(), name = 'service_history'),
     path('service_schedules/',service_schedules.as_view(),name='service_schedules'),
-    
+   
     
 ]
 
