@@ -201,8 +201,16 @@ class SubscriptionMode(models.Model):
         return self.subscriptionmode
     
 class SubscriptionDetails(models.Model):
+    CHOICES = (
+        ('Day', 'Day'),
+        ('Week', 'Week'),
+        ('Month', 'Month'),
+        ('Year','Year')
+    )
     devicesrno = models.ForeignKey(GPSDeviceDetails, on_delete=models.CASCADE)
     subscriptioncode = models.CharField(_("Subscription Code"), max_length=50, unique=True)
+    durationno = models.IntegerField(_("Duration in Numbers"), default=0)
+    durationperiod =models.CharField(_("Duration Period"),choices=CHOICES, max_length=50)
     expireson = models.DateTimeField(_("Expires On"), auto_now=False, auto_now_add=False)
     createdat = models.DateTimeField(_("Created At"),auto_now=False, auto_now_add=True)
     updatedat = models.DateTimeField(_("Updated At"), auto_now=True, auto_now_add=False)
