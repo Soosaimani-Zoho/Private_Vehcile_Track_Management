@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import redirect, render  , HttpResponse
 from django.views import View
+from django.views.generic import ListView
 import datetime
 from datetime import date
 from datetime import datetime
@@ -14,7 +15,8 @@ from .models import (
                     VehicleDetails,
                     VendorProfile,
                     DriverDetails,
-                    RouteDetails
+                    RouteDetails,
+                    SubscriptionDetails
     
                     )
 
@@ -349,6 +351,7 @@ class routes_add(View):
     def post(self, request):
         form = RouteDetailsForm(request.POST)
         if form.is_valid():
+            #selection = form.cleaned_data['selection'] #need to customise to clean form afte save. now no time.
             form.save()
             print("Route Details Added")
         else:
@@ -376,3 +379,18 @@ class service_history(View):
 class service_schedules(View):
     def get(self,request):
         return render(request,'service_schedules.html')
+    
+
+class subscription_history(ListView):
+    model = SubscriptionDetails
+    template_name = 'subscription_history.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['subscription_details'] = SubscriptionDetails.objects.all()
+        #context['another_model_data'] = AnotherModel.objects.all() #if need to add another model.
+        return context
+class subscription_renew(View):
+    template_name = 'subscription_renew.html'
+    def get(self, request):
+        return render(request, self.template_name)

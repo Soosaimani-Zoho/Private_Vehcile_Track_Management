@@ -13,6 +13,8 @@ from .models import (
     DriverDetails,
     TripDetails,
     RouteDetails,
+    SubscriptionMode,
+    SubscriptionDetails
 )
 
 
@@ -67,3 +69,11 @@ admin.site.register(TripDetails,classtripdetails)
 class classrotuedetails(admin.ModelAdmin):
     list_display = [field.name for field in RouteDetails._meta.fields]
 admin.site.register(RouteDetails,classrotuedetails)
+
+class classsubscriptionmode(admin.ModelAdmin):
+    list_display = [field.name for field in SubscriptionMode._meta.fields]
+admin.site.register(SubscriptionMode, classsubscriptionmode)
+
+class classsubscriptiondetails(admin.ModelAdmin):
+    list_display = [field.name for field in SubscriptionDetails._meta.fields]
+admin.site.register(SubscriptionDetails, classsubscriptiondetails)

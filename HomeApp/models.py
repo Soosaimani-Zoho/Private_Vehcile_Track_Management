@@ -4,6 +4,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 import json
 from django.core.exceptions import ValidationError
+#from django.db.models.signals import post_save
+#from django.dispatch import receiver
+#from datetime import timedelta
 
  
 
@@ -198,7 +201,7 @@ class TripDetails(models.Model):
 class SubscriptionMode(models.Model):
     subscripmode = models.CharField(_("Subscription Status Mode"), max_length=50, unique=True)
     def __str__(self):
-        return self.subscriptionmode
+        return self.subscripmode
     
 class SubscriptionDetails(models.Model):
     CHOICES = (
@@ -211,10 +214,36 @@ class SubscriptionDetails(models.Model):
     subscriptioncode = models.CharField(_("Subscription Code"), max_length=50, unique=True)
     durationno = models.IntegerField(_("Duration in Numbers"), default=0)
     durationperiod =models.CharField(_("Duration Period"),choices=CHOICES, max_length=50)
+    startson = models.DateTimeField(_("Subscription Starts On"), auto_now=False, auto_now_add=False)
     expireson = models.DateTimeField(_("Expires On"), auto_now=False, auto_now_add=False)
     createdat = models.DateTimeField(_("Created At"),auto_now=False, auto_now_add=True)
     updatedat = models.DateTimeField(_("Updated At"), auto_now=True, auto_now_add=False)
     subscriptionstatus = models.ForeignKey(SubscriptionMode, on_delete=models.CASCADE)
+    remaindays = models.IntegerField(_("Expiry Remaining Days"), default=0,blank=True, null=True)
+    
+    
+    '''def calculate_indays(self):
+        if self.durationperiod == 'Day':
+            self.indays = self.durationno
+        elif self.durationperiod == 'Week':
+            self.indays = self.durationno * 7
+        elif self.durationperiod == 'Month':
+            self.indays = self.durationno * 30  # Approximation, adjust as needed
+        elif self.durationperiod == 'Year':
+            self.indays = self.durationno * 365  # Approximation, adjust as needed'''
+
+    def calculate_remaindays(self):
+        #self.remaindays = self.startson + timedelta(days=self.indays)
+        remaindays =  (self.expireson - self.startson).days
+        self.remaindays = remaindays
+        
+    def save(self, *args, **kwargs):
+        # Convert subscriptioncode to uppercase before saving
+        self.subscriptioncode = self.subscriptioncode.upper()
+        #self.calculate_indays()
+        self.calculate_remaindays()
+        super().save(*args, **kwargs)
     
     def __str__(self):
-        return self.subscriptionstatus
+        return self.subscriptioncode
+    

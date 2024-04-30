@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <section class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 pb-3 pt-3">
+            <button type="button" class="btn btn-outline-secondary rounded-pill btn-sm">All <span class="badge bg-white text-primary">1</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Active <span class="badge bg-white text-primary">2</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Inactive <span class="badge bg-white text-primary">3</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Expired <span class="badge bg-white text-primary">4</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Expired Soon <span class="badge bg-white text-primary">5</span></button>
+            <button class="btn btn-outline-secondary rounded-pill btn-sm">Terminated <span class="badge bg-white text-primary">6</span></button>
+          </div>
+          <div class="col-lg-5 pb-3 pt-3 text-end">
+            <!--<button class="btn btn-warning rounded-pill btn-sm">Bulk Upload</button>-->
+            <a class="btn btn-outline-primary rounded-pill btn-sm" href="/gotoz/subscription_renew">Request Subscription</a>
+            <!--<button class="btn btn-warning rounded-pill btn-sm">Create Trip</button>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="container" style="overflow-x: auto;">
+                <div class="table-responsive">
+                  <table class="table datatable table-hover">
+                    <thead>
+                      <tr>
+                        <th>S.No</th>
+                        <th>Subscripton Code</th>
+                        <th>Vehicle Reg.No</th>
+                        <th>Days Remaining</th>
+                        <th>Status</th>
+                        <th>Vehicle Type</th>
+                        <th>Expires On</th>
+                        <th>Created At</th>                    
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for subscription in subscription_details %}
+                      <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{subscription.subscriptioncode}}</td>
+                        <td>{{subscription.devicesrno}}</td>
+                        <td>{{subscription.remaindays}}</td>
+                        <td>{{subscription.subscriptionstatus}}</td>
+                        <td></td>
+                        <td>{{subscription.expireson}}</td>
+                        <td>{{subscription.createdat}}</td>                    
+                        <td><a href="#" class="btn btn-primary btn-small mb-1"><i class="bi bi-pencil-square"></i></a>
+                            <a href="#" class="btn btn-primary btn-small"><i class="bi bi-node-plus"></i></a>
+                        </td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+
+                    </div>
+                    
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>       
+      </div>
+    </section>
+
+  {% endblock %}

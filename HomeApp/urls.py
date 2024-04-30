@@ -19,6 +19,8 @@ from .views import (
     vehicle_directory,
     vehicle_group,
     vehicle_states,
+    subscription_history,
+    subscription_renew,
 )
 
 urlpatterns = [
@@ -40,6 +42,8 @@ urlpatterns = [
     path('my_expances/',my_expances.as_view(),name='my_expances'),
     path('service_history/',service_history.as_view(), name = 'service_history'),
     path('service_schedules/',service_schedules.as_view(),name='service_schedules'),
+    path('subscription_history/',subscription_history.as_view(),name='subscription_history'),
+    path('subscription_renew/',subscription_renew.as_view(),name='subscription_renew'),
    
     
 ]
