@@ -38,7 +38,7 @@ class classcountrycodedetails(admin.ModelAdmin):
 admin.site.register(CountryCodeDetails, classcountrycodedetails)
 
 class classvendorprofile(admin.ModelAdmin):
-    list_display = ['vendorname','vendoraddress','vendorcountry','vendormob1','vendordistrict']
+    list_display = [field.name for field in VendorProfile._meta.fields]
 admin.site.register(VendorProfile,classvendorprofile)
 # Register your models here.
 

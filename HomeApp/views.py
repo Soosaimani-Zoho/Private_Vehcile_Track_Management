@@ -8,6 +8,13 @@ from datetime import date
 from datetime import datetime
 import json
 
+#-------------------API Imports---------------------------------------------------
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import VendorProfilesSerializer, UserProfileSerializer
+from rest_framework import status
+#-------------------API Imports---------------------------------------------------
+
 from .models import (
                     GPSDeviceDetails,
                     GPSDeviceStatus,
@@ -55,7 +62,27 @@ def get_vehicle_list(loginvendor):
     return vehicletotalregnolist
     pass
     
+#----------------------API- Views----------------------------------------------------------------------------------------------
+class API_VendorProfiles(APIView):
+    
+    def get(self, request):
+        try:
+            queryset = VendorProfile.objects.all()
+            serialized_data = VendorProfilesSerializer(queryset, many=True)
+            return Response(serialized_data.data)
+        except Exception as e:
+            # Print detailed error message for debugging
+            print("Serialization Error:", e)
+            # Return an appropriate response indicating a server error
+            return Response({"error": "An error occurred during serialization."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def post(self,request):
+        pass
+    def put(self,request):
+        pass
+    def delete(self, request):
+        pass
 
+#----------------------API- Views------------------------------------------------------------------------------------------------
 
 
 
@@ -75,6 +102,10 @@ class all_vehicle(View):
         #---------------------------------find loginuser ID-----------
         #loginuser = User.objects.get(username=user)
         userid = int(get_login_user_id(request))
+        login_vendor_list = VendorProfile.objects.all()
+        print('Login vendor list:')
+        for vendor_profile in login_vendor_list:
+            print(vars(vendor_profile))
         #print(userid)
         #userid=2
         #---------------------------------find login vendor name by ID-------
@@ -390,6 +421,7 @@ class subscription_history(ListView):
         context['subscription_details'] = SubscriptionDetails.objects.all()
         #context['another_model_data'] = AnotherModel.objects.all() #if need to add another model.
         return context
+    
 class subscription_renew(View):
     template_name = 'subscription_renew.html'
     def get(self, request):

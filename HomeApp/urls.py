@@ -21,7 +21,31 @@ from .views import (
     vehicle_states,
     subscription_history,
     subscription_renew,
+    
+    #--------------API Views---------------
+    API_VendorProfiles,
+    #--------------API Views---------------
 )
+
+#----------------------API Swagger-------------------------------------------------------------------
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schema_view = get_schema_view(
+    openapi.Info(
+       title="KSM RestAPI Swagger",
+       default_version='v1',
+       description="KSM API Description",
+       terms_of_service="https://www.example.com/policies/terms/",
+       contact=openapi.Contact(email="soosaimanni@gotoz.com"),
+       license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
+#----------------------API Swagger-----------------------------------------------------------------
+
 
 urlpatterns = [
     #path('logout',logout_view,name='logout'),    
@@ -44,7 +68,16 @@ urlpatterns = [
     path('service_schedules/',service_schedules.as_view(),name='service_schedules'),
     path('subscription_history/',subscription_history.as_view(),name='subscription_history'),
     path('subscription_renew/',subscription_renew.as_view(),name='subscription_renew'),
-   
+    
+    
+    #-------------------------------Swagger API-----------------------------------------------------
+    
+    path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('swagger/vendorlist',API_VendorProfiles.as_view(),name='VendorProfiles_List'),
+    
+    #-------------------------------Swagger API------------------------------------------------------
     
 ]
 
