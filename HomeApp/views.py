@@ -62,7 +62,7 @@ def get_vehicle_list(loginvendor):
     return vehicletotalregnolist
     pass
     
-#----------------------API- Views----------------------------------------------------------------------------------------------
+#----------------------API- Views--------------------------VVVVVV--------------------------------------------------------------------
 class API_VendorProfiles(APIView):
     
     def get(self, request):
@@ -82,7 +82,62 @@ class API_VendorProfiles(APIView):
     def delete(self, request):
         pass
 
-#----------------------API- Views------------------------------------------------------------------------------------------------
+class API_VehicleDetails(APIView):    
+    def get(self, request):
+        try:
+            queryset = VendorProfile.objects.all()
+            serialized_data = VendorProfilesSerializer(queryset, many=True)
+            return Response(serialized_data.data)
+        except Exception as e:
+            # Print detailed error message for debugging
+            print("Serialization Error:", e)
+            # Return an appropriate response indicating a server error
+            return Response({"error": "An error occurred during serialization."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def post(self,request):
+        pass
+    def put(self,request):
+        pass
+    def delete(self, request):
+        pass
+    
+    
+class API_VendorProfiles(APIView):
+    
+    def get(self, request):
+        try:
+            queryset = VendorProfile.objects.all()
+            serialized_data = VendorProfilesSerializer(queryset, many=True)
+            return Response(serialized_data.data)
+        except Exception as e:
+            # Print detailed error message for debugging
+            print("Serialization Error:", e)
+            # Return an appropriate response indicating a server error
+            return Response({"error": "An error occurred during serialization."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def post(self,request):
+        pass
+    def put(self,request):
+        pass
+    def delete(self, request):
+        pass
+
+class API_VeihleDetails(APIView):    
+    def get(self, request):
+        try:
+            queryset = VendorProfile.objects.all()
+            serialized_data = VendorProfilesSerializer(queryset, many=True)
+            return Response(serialized_data.data)
+        except Exception as e:
+            # Print detailed error message for debugging
+            print("Serialization Error:", e)
+            # Return an appropriate response indicating a server error
+            return Response({"error": "An error occurred during serialization."}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    def post(self,request):
+        pass
+    def put(self,request):
+        pass
+    def delete(self, request):
+        pass
+#----------------------API- Views-------------------^^^^^-----------------------------------------------------------------------------
 
 
 

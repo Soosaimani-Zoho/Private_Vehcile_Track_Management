@@ -23,7 +23,7 @@ from .views import (
     subscription_renew,
     
     #--------------API Views---------------
-    API_VendorProfiles,
+    API_VendorProfiles, API_VehicleDetails,API_VeihleDetails
     #--------------API Views---------------
 )
 
@@ -75,7 +75,9 @@ urlpatterns = [
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
-    path('swagger/vendorlist',API_VendorProfiles.as_view(),name='VendorProfiles_List'),
+    path('swagger/vendorprofile',API_VendorProfiles.as_view(),name='VendorProfiles_List'),
+    path('swagger/vehicledetails',API_VehicleDetails.as_view(),name='Vehicle Details'),
+    path('swagger/API_VeihleDetails',API_VehicleDetails.as_view(),name='API_VeihleDetails'),
     
     #-------------------------------Swagger API------------------------------------------------------
     
