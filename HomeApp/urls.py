@@ -27,7 +27,7 @@ from .views import (
     #--------------API Views---------------
 )
 
-#----------------------API Swagger-------------------------------------------------------------------
+#----------------------API Swagger Setting-----------------------------------------------------------------
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -44,7 +44,7 @@ schema_view = get_schema_view(
     public=True,
     permission_classes=(permissions.AllowAny,),
 )
-#----------------------API Swagger-----------------------------------------------------------------
+#----------------------API Swagger Setting-----------------------------------------------------------------
 
 
 urlpatterns = [
@@ -70,7 +70,7 @@ urlpatterns = [
     path('subscription_renew/',subscription_renew.as_view(),name='subscription_renew'),
     
     
-    #-------------------------------Swagger API-----------------------------------------------------
+    #-------------------------------Swagger API URL-----------------------------------------------------
     
     path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
@@ -79,7 +79,7 @@ urlpatterns = [
     path('swagger/vehicledetails',API_VehicleDetails.as_view(),name='Vehicle Details'),
     path('swagger/API_VeihleDetails',API_VehicleDetails.as_view(),name='API_VeihleDetails'),
     
-    #-------------------------------Swagger API------------------------------------------------------
+    #-------------------------------Swagger API URL------------------------------------------------------
     
 ]
 

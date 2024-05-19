@@ -1,0 +1,7 @@
+only run with environment 
+
+move to E:\Gotoz\Django Project\Private_Vehcile_Track_Management\FastAPI\
+
+.\myenv\scripts\activate
+
+uvicorn main:app

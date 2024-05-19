@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 import dj_database_url
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -142,3 +143,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert alert-secondary alert-dismissible fade show',
+        messages.INFO: 'alert alert-info alert-dismissible fade show',
+        messages.SUCCESS: 'alert alert-primary alert-dismissible fade show',
+        messages.WARNING: 'alert alert-warning alert-dismissible fade show',
+        messages.ERROR: 'alert alert-danger alert-dismissible fade show',
+ }

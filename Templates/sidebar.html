@@ -2,14 +2,14 @@
 <ul class="sidebar-nav" id="sidebar-nav">
     <li class="nav-heading">Main</li>
     <hr />
-    <li class="nav-item">
+    <li class="nav-item"><!--Dashboard-->
       <a class="nav-link " href="/gotoz">
         <i class="bi bi-grid"></i>
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
-    <li class="nav-item">
+    <li class="nav-item"><!--Vehicle Tracking-->
       <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-menu-button-wide"></i><span>Vehicle Tracking</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -82,7 +82,25 @@
       </ul>
     </li><!-- End Components Nav -->
 
-    <li class="nav-item">
+    <li class="nav-item"><!--Drivers-->
+      <a class="nav-link collapsed" data-bs-target="#device-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>Devices</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="device-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>My GPS Device</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>GPS Status</span>
+          </a>
+        </li>
+      </ul>
+    </li>
+    
+    <li class="nav-item"><!--Drivers-->
       <a class="nav-link collapsed" data-bs-target="#driver-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Drivers</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -98,10 +116,10 @@
           </a>
         </li>
       </ul>
-    </li><!-- End Tables Nav -->
+    </li>
 
     <!--Trip-->
-    <li class="nav-item">
+    <li class="nav-item"><!--Trip-->
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-journal-text"></i><span>Trip</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -127,9 +145,9 @@
           </a>
         </li>
       </ul>
-    </li><!-- End Forms Nav -->
+    </li>
 
-    <li class="nav-item">
+    <li class="nav-item"><!--Reports-->
       <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-layout-text-window-reverse"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -145,9 +163,9 @@
           </a>
         </li>
       </ul>
-    </li><!-- End Tables Nav -->
+    </li>
 
-    <li class="nav-item">
+    <li class="nav-item"><!--Expances-->
       <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-bar-chart"></i><span>Expances</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -168,9 +186,9 @@
           </a>
         </li>-->
       </ul>
-    </li><!-- End Charts Nav -->
+    </li>
 
-    <li class="nav-item">
+    <li class="nav-item"><!--Maintanance-->
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gem"></i><span>Maintanace</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -193,7 +211,7 @@
       </ul>
     </li>
     
-    <li class="nav-item">
+    <li class="nav-item"><!--Subscriptions-->
       <a class="nav-link collapsed" data-bs-target="#subscription-nav" data-bs-toggle="collapse" href="#">
         <i class="bi bi-gem"></i><span>Subscriptions</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
@@ -219,9 +237,9 @@
           </a>
         </li>-->
       </ul>
-    </li><!-- End Icons Nav -->
+    </li>
 
-    <li class="nav-heading">Drivers</li>
+    <li class="nav-heading">Settings</li>
     <hr />
 
     <li class="nav-item">
@@ -229,7 +247,7 @@
         <i class="bi bi-person"></i>
         <span>Profile</span>
       </a>
-    </li><!-- End Profile Page Nav -->
+    </li>
 
     <!--<li class="nav-item">
       <a class="nav-link collapsed" href="#">

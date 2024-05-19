@@ -7,6 +7,7 @@ import datetime
 from datetime import date
 from datetime import datetime
 import json
+from django.contrib import messages
 
 #-------------------API Imports---------------------------------------------------
 from rest_framework.response import Response
@@ -60,6 +61,9 @@ def get_vehicle_list(loginvendor):
         vehicletotalregnolist.append(vehicle.vehicleregno)
     print("total registration no :",vehicletotalregnolist)
     return vehicletotalregnolist
+    pass
+
+def gps_device_list():    
     pass
     
 #----------------------API- Views--------------------------VVVVVV--------------------------------------------------------------------
@@ -158,9 +162,9 @@ class all_vehicle(View):
         #loginuser = User.objects.get(username=user)
         userid = int(get_login_user_id(request))
         login_vendor_list = VendorProfile.objects.all()
-        print('Login vendor list:')
-        for vendor_profile in login_vendor_list:
-            print(vars(vendor_profile))
+        #print('Login vendor list:')
+        '''for vendor_profile in login_vendor_list:
+            print(vars(vendor_profile))'''
         #print(userid)
         #userid=2
         #---------------------------------find login vendor name by ID-------
@@ -180,13 +184,7 @@ class all_vehicle(View):
         print("total registration no :",vehicletotalregnolist)'''
         vehicletotalregnolist = get_vehicle_list(loginvendor)
         
-        
-        
-        
-            
-        
-        vehicletotalcount = len(vehiclelistquery)
-        print(vehicletotalcount)
+        #print("vehicletotalregnolist",vehicletotalregnolist)
         
         gpsdevicelist = []
         gpsdeviceidlist = []
@@ -198,6 +196,64 @@ class all_vehicle(View):
                 gpsdevicelist.append(gps_device.deviceserialno)
                 gpsdeviceidlist.append(gps_device.id)
                 gpssubscriptionlist.append(gps_device.expiredat)
+                
+        gps_data = {}
+        for gpsdevice in gpsdeviceidlist:
+            query = GPSDeviceStatus.objects.filter(deviceserialno=gpsdevice)
+            gps_data[gpsdevice] = {
+                'moving': [],
+                'stopped': [],
+                'idlling': [],
+                'offline': [],
+                'subsexpired': [],
+                'ignition': [],
+                'gpssignal': [],
+                'speed': [],
+                'orientationvalue': [],
+                'deviceexternalpower': [],
+                'location': [],
+                'temperature': [],
+                'internalbatterypower': [],
+                'movmentvalue': [],
+                'gsmstrength': [],
+                'lat': [],
+                'long': [],
+            }
+            
+            for gpsstatus in query:
+                gps_data[gpsdevice]['moving'].append(gpsstatus.moving)
+                gps_data[gpsdevice]['stopped'].append(gpsstatus.stopped)
+                gps_data[gpsdevice]['idlling'].append(gpsstatus.idlling)
+                gps_data[gpsdevice]['offline'].append(gpsstatus.offline)
+                gps_data[gpsdevice]['subsexpired'].append(gpsstatus.subsexpired)
+                gps_data[gpsdevice]['ignition'].append(gpsstatus.ignition)
+                gps_data[gpsdevice]['gpssignal'].append(gpsstatus.gpssignal)
+                gps_data[gpsdevice]['speed'].append(gpsstatus.speed)
+                gps_data[gpsdevice]['orientationvalue'].append(gpsstatus.orientationvalue)
+                gps_data[gpsdevice]['deviceexternalpower'].append(gpsstatus.deviceexternalpower)
+                gps_data[gpsdevice]['location'].append(gpsstatus.location)
+                gps_data[gpsdevice]['temperature'].append(gpsstatus.temperature)
+                gps_data[gpsdevice]['internalbatterypower'].append(gpsstatus.internalbatterypower)
+                gps_data[gpsdevice]['movmentvalue'].append(gpsstatus.movmentvalue)
+                gps_data[gpsdevice]['gsmstrength'].append(gpsstatus.gsmstrength)
+                gps_data[gpsdevice]['lat'].append(gpsstatus.lat)
+                gps_data[gpsdevice]['long'].append(gpsstatus.long)
+        gpsdata_json = json.dumps(gps_data)
+        
+        context={
+            'vechileregnolists':vehicletotalregnolist,
+            'all':len(vehicletotalregnolist),
+            
+        }
+        return render(request,'all_vehicle.html', context)
+        
+        
+            
+        
+        '''vehicletotalcount = len(vehiclelistquery)
+        print(vehicletotalcount)
+        
+        
         
         [print(date_obj.date()) for date_obj in gpssubscriptionlist]
         #print(dates)
@@ -282,8 +338,8 @@ class all_vehicle(View):
         coordinates = zip(latitude_list, longitude_list,vehicletotalregnolist,latitude_list,longitude_list, location_list) # now its create as object
         
         
-        print("Latitude 1:", latitude_list[0], "Longitude 1:", longitude_list[0])
-        print("Latitude 2:", latitude_list[1], "Longitude 2:", longitude_list[1])
+        #print("Latitude 1:", latitude_list[0], "Longitude 1:", longitude_list[0])
+        #print("Latitude 2:", latitude_list[1], "Longitude 2:", longitude_list[1])
         #print("Latitude 3:", latitude_list[2], "Longitude 3:", longitude_list[2])
         #print(coordinates)
         
@@ -291,10 +347,10 @@ class all_vehicle(View):
             if 'moving' in value:
                 move_value = value['moving']
                 if True in move_value:
-                    movecounttrue += 1 
-                '''elif False in move_value:
+                    movecounttrue += 1'''
+'''                elif False in move_value:
                     movecountfalse += 1'''
-            if 'stopped' in value:
+'''            if 'stopped' in value:
                 stop_value = value['stopped']
                 if True in stop_value:
                     stopcountertrue += 1
@@ -326,8 +382,8 @@ class all_vehicle(View):
             'moving':movecounttrue,'stopped':stopcountertrue,'idlling':idllingcountertrue,'offline':offlinecountertrue,
             'subscriptionexpired':subscripexpcountertrue, 'regnowithexpiry':devregwithsubexpirty, 'devicelatlist':latitude_list,
             'devicelonglisst':longitude_list, 'gpscoordinates':coordinates
-        }
-        return render(request,'all_vehicle.html', context)
+        }'''
+        
     
     
 class vehicle_directory(View):
@@ -362,6 +418,7 @@ class vehicle_directory(View):
         
 
         return render(request,'vehicle_directory_edit.html',context)
+
 class vehicle_directory_add(View):
     def get(self, request):
         user = request.user.username
@@ -373,14 +430,18 @@ class vehicle_directory_add(View):
         
         return render(request, 'vehicle_directory_add.html',{'form':form, 'loginvendor':loginvendor})
         pass
-    def post(self,request):
-        
-        
+    
+    def post(self,request):        
         form = vehicledetailsform(request.POST,request.FILES)
-        if form.is_valid():
+        try:
+            form.is_valid()
             form.save()
-        else:
+            messages.success(request,"Your Vehicle Details saved Successfully")
+        except Exception as e:
+            # Print detailed error message for debugging
+            print("Form save Error:", e)
             form = vehicledetailsform()
+            messages.info(request, "{}".format(e))
         return render(request, 'vehicle_directory_add.html', {'form': form})
         
 
@@ -409,9 +470,11 @@ class my_driver_add(View):
         form = DriverdetailsForm(request.POST)
         if form.is_valid():
             form.save()  # This will save the form data into the database
+            messages.success(request,"Your Details saved Successfully")
             print("Form saved successfully")
         else:
             print("not valid")
+            messages.error(request,"Not valid Details.")
         return render(request, 'my_driver_add.html', {'form':form})
   
 class all_trips(View):
@@ -421,6 +484,7 @@ class all_trips(View):
 class trip_schedules(View):
     def get(self, request):
         return render(request, 'trip_schedules.html')
+
 class routes(View):
     
     def get(self,request):

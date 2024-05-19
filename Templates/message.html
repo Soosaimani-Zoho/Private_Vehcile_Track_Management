@@ -1,0 +1,11 @@
+{% load static %}
+{% if messages %}
+  <ul class="messages">
+    {% for message in messages %}     
+
+      <div class="{{ message.tags }}" role="alert">
+        {{message}}<button type="button" class="btn-close btn-close-black" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </ul>
+  {% endif %}

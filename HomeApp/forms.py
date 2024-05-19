@@ -1,7 +1,18 @@
 from django import forms
-from .models import VehicleDetails, DriverDetails, CountryCodeDetails, RouteDetails
+from .models import VehicleDetails, DriverDetails, CountryCodeDetails, RouteDetails, VendorProfile, vehiclemake
 
 class vehicledetailsform(forms.ModelForm):
+    vendorid = forms.ModelChoiceField(queryset=VendorProfile.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-select'}))
+    vehiclename = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Vehicle Name'}))
+    vehicleregno = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Vehicle Registration Name'}))
+    vehicletype = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Vehicle Type'}))
+    vehicleimage = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control'}),required=False)
+    odometerreading = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Odometer Reading'}))
+    vehiclemake = forms.ModelChoiceField(queryset=vehiclemake.objects.all(), empty_label=None, widget=forms.Select(attrs={'class': 'form-select'}))
+    modelyear = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Vehicle Name'}))
+    chessisno = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Chessis Number'}))    
+    expectmileage = forms.IntegerField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Enter Expected Mileage'}))
+    
     class Meta:
         model = VehicleDetails
         fields = "__all__"

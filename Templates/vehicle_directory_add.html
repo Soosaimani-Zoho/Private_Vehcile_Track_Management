@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<section class="section">
+{% include 'message.html' %}
   <div class="row">
     <div class="col-lg-12">
 
@@ -13,85 +13,82 @@
           <!--  Form Elements -->
           <form method="post">
             {% csrf_token %}
+            
             {{ form.non_field_errors }}
             <div class="row mb-3">
-              <label for="{{form.vendorid.id_for_label}}" class="col-sm-2 col-form-label">Name.</label>
+              {{ form.vendorid.errors}}
+              <label for="{{form.vendorid.id_for_label}}" class="col-sm-2 col-form-label"> Vendor Name.</label>
               <div class="col-sm-10">
-                <!--<input type="text" class="form-control" name="{{ form.vehicleregno }}">-->
-                <input type="text" class="form-control" name="{{ loginvendor }}" value="{{loginvendor}}" disabled>
+                {{ form.vendorid }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.vehiclename.errors}}
+              <label for="{{form.vehiclename.id_for_label}}" class="col-sm-2 col-form-label">vehiclename.</label>
+              <div class="col-sm-10">
+                {{ form.vehiclename }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.vehicleregno.errors}}
+              <label for="{{form.vehicleregno.id_for_label}}" class="col-sm-2 col-form-label">vehicleregno.</label>
+              <div class="col-sm-10">
+                {{ form.vehicleregno }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.vehicletype.errors}}
+              <label for="{{form.vehicletype.id_for_label}}" class="col-sm-2 col-form-label">vehicletype.</label>
+              <div class="col-sm-10">
+                {{ form.vehicletype }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.vehicleimage.errors}}
+              <label for="{{form.vehicleimage.id_for_label}}" class="col-sm-2 col-form-label">vehicleimage.</label>
+              <div class="col-sm-10">
+                {{ form.vehicleimage }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.odometerreading.errors}}
+              <label for="{{form.odometerreading.id_for_label}}" class="col-sm-2 col-form-label">odometerreading.</label>
+              <div class="col-sm-10">
+                {{ form.odometerreading }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.vehiclemake.errors}}
+              <label for="{{form.vehiclemake.id_for_label}}" class="col-sm-2 col-form-label">vehiclemake.</label>
+              <div class="col-sm-10">
+                {{ form.vehiclemake }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.modelyear.errors}}
+              <label for="{{form.modelyear.id_for_label}}" class="col-sm-2 col-form-label">modelyear.</label>
+              <div class="col-sm-10">
+                {{ form.modelyear }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.chessisno.errors}}
+              <label for="{{form.chessisno.id_for_label}}" class="col-sm-2 col-form-label">chessisno.</label>
+              <div class="col-sm-10">
+                {{ form.chessisno }}
+              </div>
+            </div>
+            <div class="row mb-3">
+              {{ form.expectmileage.errors}}
+              <label for="{{form.expectmileage.id_for_label}}" class="col-sm-2 col-form-label">expectmileage.</label>
+              <div class="col-sm-10">
+                {{ form.expectmileage }}
               </div>
             </div>
 
-            <div class="row mb-3">
-              <label for="{{form.vehiclename.id_for_label}}" class="col-sm-2 col-form-label">Vehicle Name</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.vehiclename.name }}">
-                <!--<input type="text" class="form-control" name="">-->
-                
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.vehicleregno.id_for_label}}" class="col-sm-2 col-form-label">Registratin No.</label>
-              <div class="col-sm-10">
-                <!--<input type="text" class="form-control" name="{{ form.vehicleregno }}">-->
-                <input type="text" class="form-control" name="{{ form.vehicleregno.name }}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.vehicletype.id_for_label}}" class="col-sm-2 col-form-label">Vehicle Type</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.vehicletype.name }}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.vehicleimage.id_for_label}}" class="col-sm-2 col-form-label">Vehicle Image</label>
-              <div class="col-sm-10">
-                <input class="form-control" type="file" id="formFile" name="{{form.vehicleimage.name}}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.odometerreading.id_for_label}}" class="col-sm-2 col-form-label">Odometer Reading</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.odometerreading.name }}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.vehiclemake.id_for_label}}" class="col-sm-2 col-form-label">Vehicle make</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.vehiclemake.name }}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.modelyear.id_for_label}}" class="col-sm-2 col-form-label">Model Year</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.modelyear.name }}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.chessisno.id_for_label}}" class="col-sm-2 col-form-label">Chessis No.</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.chessisno.name }}">
-              </div>
-            </div>
+
             
-            <div class="row mb-3">
-              <label for="{{form.chessisno.id_for_label}}" class="col-sm-2 col-form-label">Chessis No.</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.chessisno.name }}">
-              </div>
-            </div>
-            <div class="row mb-3">
-              <label for="{{form.expectmileage.id_for_label}}" class="col-sm-2 col-form-label">Expected Mileage</label>
-              <div class="col-sm-10">
-                <input type="text" class="form-control" name="{{ form.expectmileage.name }}">
-              </div>
-            </div>
-            <div class="form-check" style="display: none;">
-              <input class="form-check-input" type="checkbox" id="gridCheck1" name="{{ form.isdelete.name }}">
-              <label class="form-check-label" for="{{form.isdelete.id_for_label}}">
-                Delete
-              </label>
-            </div>
+            
             
 
             <div class="row mb-3 justify-content-center">
